@@ -1,6 +1,7 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client';
+import HomePageTest from '../pages/homePageTest'
 import HomePage from '../pages/homePage'
+
 import {
   createBrowserRouter,
   RouterProvider,
@@ -12,6 +13,10 @@ import {
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <HomePageTest/>
+  },
+  {
+    path: "home",
     element: (
       <HomePage/>
     ),
