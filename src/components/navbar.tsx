@@ -7,9 +7,12 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 
+//import {useNavigate} from 'react-router-dom';
 
 
 export default function Navbar(){
+  //const navigate = useNavigate();
+
     return (
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
@@ -28,7 +31,7 @@ export default function Navbar(){
             </Typography>            
             <Button color="inherit">Pourquoi A . DO . MI ?</Button>
             <Button color="inherit">Nous contacter</Button>
-            <Button color="inherit">Espace client</Button>
+            <Button color="inherit" href="sign-in">Espace client</Button>
           </Toolbar>
         </AppBar>
       </Box>

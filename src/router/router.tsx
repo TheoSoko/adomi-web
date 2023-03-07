@@ -1,13 +1,10 @@
 import React from 'react';
 import HomePageTest from '../pages/homePageTest'
 import HomePage from '../pages/homePage'
+import SignIn from '../pages/signIn'
+import PropTypes from 'prop-types';
 
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-  Link,
-} from 'react-router-dom';
+import { createBrowserRouter, Route, Link } from 'react-router-dom';
 
 
 const router = createBrowserRouter([
@@ -17,16 +14,18 @@ const router = createBrowserRouter([
   },
   {
     path: "home",
+    element: <HomePage/>
+  },
+  {
+    path: "sign-in",
     element: (
-      <HomePage/>
+      <SignIn/>
     ),
   },
   {
     path: "about",
-    element: (
-      <div></div>
-    ),
+    element: <div></div>,
   },
-]);
+])
 
 export default router
