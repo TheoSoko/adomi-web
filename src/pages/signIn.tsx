@@ -5,7 +5,8 @@ import FormHelperText from '@mui/material/FormHelperText';
 import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
 import Button from '@mui/material/Button'
-import {useState, useEffect, useRef} from 'react'
+import {useState, useEffect, useRef, SetStateAction} from 'react'
+import {serverSignIn} from '../api/http'
 
 const errorMessages = {
     standard : 'Le nom d\'utilisateur ou le mot de passe est incorrect',
@@ -15,24 +16,32 @@ const errorMessages = {
 
 type ValueOf<T> = T[keyof T]
 type Error = {
-    username?: ValueOf<typeof errorMessages>  // "string" pour les intimes 
-    password?: ValueOf<typeof errorMessages>
+    username: ValueOf<typeof errorMessages> | null // "string or null" pour les intimes 
+    password: ValueOf<typeof errorMessages> | null
 }
 
 
 
 export default function SignIn(){
 
-    const [errorList, setErrorList] = useState<Error>({})
+    const [errorList, setErrorList] = useState<Error>({username:null, password:null})
     const [username, setUsername] = useState<string>('')
     const [password, setPassword] = useState<string>('')
- 
-    const serverSignIn = () => {
-        
+    const [serverResponse, setServerResponse] = useState<{}>()
 
-
-        //setErrorList({...errorList, username: errorMessages.username})
+    const handleConnection = () => {
+        console.log(username, ' ', password)
+        serverSignIn({username: username, password: password}, (res) => setServerResponse(res))
+        console.log(serverResponse) // ça fonctionne
     }
+    const handleError = (field: 'username' | 'password') => {
+        if (false){
+            setErrorList({...errorList, username: errorMessages.password})
+            const toBeOrNotToBe = () => undefined
+            return ( true || false ) as unknown as typeof toBeOrNotToBe 
+        }
+    }
+    
 
 
     return(
@@ -47,9 +56,9 @@ export default function SignIn(){
                             id="username"
                             aria-describedby="component-error-text"
                             onBlur = {(event) => {
-                                event.target.value 
-                                    ? setErrorList({...errorList, username: errorMessages.username}) 
-                                    : setErrorList({}) 
+                                event.target.value.length == 0
+                                ? setErrorList({...errorList, username: null})
+                                : handleError('username')
                             }}
                             onChange = {(event) => setUsername(event.target.value)}
                         />
@@ -63,10 +72,10 @@ export default function SignIn(){
                             id="password"
                             aria-describedby="component-error-text"
                             onBlur = {(event) => {
-                                event.target.value 
-                                    ? setErrorList({... errorList, password: errorMessages.password}) 
-                                    : setErrorList({}) 
-                            }} 
+                                event.target.value.length == 0
+                                ? setErrorList({...errorList, password: null})
+                                : handleError('password')
+                            }}
                             onChange = {(event) => setPassword(event.target.value)}
                         />
                         <FormHelperText id="component-error-text">{errorList.password}</FormHelperText>
@@ -75,7 +84,7 @@ export default function SignIn(){
                 {
                     (Boolean(username.length) && Boolean(password.length))
                         ?
-                        <Button variant="contained" style={styles.button} onClick={() => serverSignIn()}>Connexion</Button>
+                        <Button variant="contained" style={styles.button} onClick={() => handleConnection()}>Connexion</Button>
                         :
                         <p>{null}</p>
                 }
