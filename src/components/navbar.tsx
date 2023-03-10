@@ -6,12 +6,15 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-//import {useNavigate} from 'react-router-dom';
+
 
 
 export default function Navbar(){
-  //const navigate = useNavigate();
+  const location = useLocation()
+  const navigate = useNavigate()
+
 
     return (
       <Box sx={{ flexGrow: 1 }}>
@@ -26,12 +29,12 @@ export default function Navbar(){
             >
               <MenuIcon />
             </IconButton>
-            <Typography style={styles.homeButton} variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              A Do Mi
-            </Typography>            
-            <Button style={styles.navButton} color="inherit">Pourquoi A Do Mi ?</Button>
+              <Typography style={styles.homeButton} variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                <a href="home" style={{color:"white", textDecoration: "none"}}> A Do Mi </a>        
+              </Typography>    
+            <Button style={styles.navButton} color="inherit" href={location.pathname == '/home' ? "#why-join-us" : "/home#why-join-us"}>Pourquoi A Do Mi ?</Button>
             <Button style={styles.navButton} color="inherit">Nous contacter</Button>
-            <Button style={styles.navButton} color="inherit" href="sign-in">Espace client</Button>
+            <Button style={styles.navButton} color="inherit" href='/client'>Espace client</Button>
           </Toolbar>
         </AppBar>
       </Box>
@@ -40,7 +43,7 @@ export default function Navbar(){
 
 const styles = {
     homeButton:  {
-      marginInlineStart: -760,
+      marginInlineStart: -785,
       fontSize: 25,
     },
     navButton: {

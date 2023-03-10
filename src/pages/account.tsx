@@ -6,16 +6,16 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 
 
-export default function Account (props:{id?:number, token?:string}){
+export default function Account (props:{credentials?:{id:number, token:string}}){
     const navigate = useNavigate()
     const location = useLocation()
     const [id, setId] = useState<number>()
 
     useEffect(()=>{
-        if (!location?.state?.id){
-            return navigate('/sign-in')
+        if (!props.credentials?.id){
+            //return navigate('/sign-in')
         }
-        setId(location.state.id)
+        setId(props.credentials!.id)
     }, [])
 
     return (
@@ -31,7 +31,7 @@ export default function Account (props:{id?:number, token?:string}){
 
 const styles = {
     container : {
-        textAlign: 'center' as const
+        textAlign: "center" as const
     },
     title : {
         marginBlockStart: 60,
