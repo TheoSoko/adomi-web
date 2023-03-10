@@ -35,9 +35,9 @@ export default function HomePageTest() {
           {
             renderLogos(false)
           }
-          <p style={{marginInline: 260, fontWeight: "600", paddingBlockEnd: 40, marginBlockStart: 15}}>
-            Vous souhaitez surfer sur la toile de notre site? Veuillez patientez quelques temps, 
-            que nous mettions en place react-router. A bientôt !
+          <p style={{marginInline: 390, fontWeight: "600", paddingBlockEnd: 40, marginBlockStart: 15}}>
+            Ceci est une page de test. Cliquez sur le lien plus haut pour surfer 
+            sur la toile de notre super site !
           </p>
           {
             renderLogos(true)

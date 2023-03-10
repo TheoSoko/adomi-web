@@ -26,14 +26,24 @@ export default function Navbar(){
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Typography style={styles.homeButton} variant="h6" component="div" sx={{ flexGrow: 1 }}>
               A Do Mi
             </Typography>            
-            <Button color="inherit">Pourquoi A . DO . MI ?</Button>
-            <Button color="inherit">Nous contacter</Button>
-            <Button color="inherit" href="sign-in">Espace client</Button>
+            <Button style={styles.navButton} color="inherit">Pourquoi A Do Mi ?</Button>
+            <Button style={styles.navButton} color="inherit">Nous contacter</Button>
+            <Button style={styles.navButton} color="inherit" href="sign-in">Espace client</Button>
           </Toolbar>
         </AppBar>
       </Box>
     )
+}
+
+const styles = {
+    homeButton:  {
+      marginInlineStart: -760,
+      fontSize: 25,
+    },
+    navButton: {
+      marginInline: 11
+    }
 }
