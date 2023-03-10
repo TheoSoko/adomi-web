@@ -6,7 +6,7 @@ import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
 import Button from '@mui/material/Button'
 import {useState, useEffect, useRef, SetStateAction} from 'react'
-import { useNavigate, Link } from "react-router-dom"
+import { useNavigate, Link, useLocation } from "react-router-dom"
 import {serverSignIn} from '../api/http'
 import { textAlign } from '@mui/system';
 
@@ -26,26 +26,32 @@ type Error = {
     password: ValueOf<typeof errorMessages> | null
 }
 
+type Credentials = {
+    id:number,
+    token:string
+  }  
+type Props = {
+    clientNav?: (cred:Credentials) => void
+}
+  
 
-
-export default function SignIn(){
+export default function SignIn(props: Props){
 
     const [errorList, setErrorList] = useState<Error>({standard:null, username:null, password:null})
     const [username, setUsername] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [serverResponse, setServerResponse] = useState<{}>()
     const navigate = useNavigate()
+    const location = useLocation()
     
-    useEffect(()=>{
-        //
-    })
 
     const handleConnection = () => {
         serverSignIn({username: username, password: password}, (res) => {
             if (typeof res == 'object'){
                 setServerResponse(res)
                 //console.log(res)
-                navigate('/account', {state: res})
+                //navigate('/client/account', {state: {credentials: res}})
+                props?.clientNav && props.clientNav(res)
             }
             if (res == '401'){
                 setErrorList({...errorList, standard: errorMessages.standard[0]})
@@ -119,20 +125,20 @@ export default function SignIn(){
 
 const styles = {
     container : {
-        textAlign: 'center' as const
+        textAlign: "center" as const
     },
     title : {
         marginBlockStart: 40,
         marginBlockEnd: 50
     },
     formField: {
-        display:'block',
+        display:"block",
         marginBlockEnd: 20,
     },
     standardError: {
         fontSize: 15,
-        color: 'red',
-        textAlign: 'center' as const,
+        color: "red",
+        textAlign: "center" as const,
         marginBlockStart: 25
     },
     button: {
