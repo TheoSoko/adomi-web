@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useLocation  } from 'react-router-dom'
-import { UserContext } from '../App';
+import { UserContext } from '../index';
 import { useContext } from 'react'
 
 

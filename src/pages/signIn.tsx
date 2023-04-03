@@ -7,23 +7,8 @@ import Button from '@mui/material/Button'
 import {useState} from 'react'
 import inputValidation from '../utils/validation'
 import {serverSignIn} from '../api/http'
-import { Credentials, ValueOf } from '../types/types'
+import { Error } from '../types/types'
 
-
-const errorMessages = {
-    general : [
-        'Nom d\'utilisateur ou mdp pas correc.',
-        'Le service est momentanément indisponible, veuillez réessayer plus tard.',
-    ],
-    username: 'Le nom d\'utilisateur est incorrect',
-    password: 'Le mot de passe est incorrect'
-}
-
-type Error = {
-    general: string | null
-    username: ValueOf<typeof errorMessages> | null // "string | null" pour les intimes 
-    password: ValueOf<typeof errorMessages> | null
-}
 
 
 export default function SignIn(props: {updateCredentials?: any}){
@@ -31,12 +16,10 @@ export default function SignIn(props: {updateCredentials?: any}){
     const [errorList, setErrorList] = useState<Error>({general:null, username:null, password:null})
     const [username, setUsername] = useState<string>('')
     const [password, setPassword] = useState<string>('')
-    const [serverResponse, setServerResponse] = useState<{}>()
 
     const handleConnection = () => {
         serverSignIn({username: username, password: password}, (res) => {
             if (typeof res == 'object'){
-                setServerResponse(res)
                 props.updateCredentials(res)
             }
             if (typeof res == 'string'){
@@ -44,10 +27,9 @@ export default function SignIn(props: {updateCredentials?: any}){
             }
         })
     }
-
+    
 
     return(
-
         <div style={styles.container}>
             <Navbar/>
             <h1 style={styles.title}>Se connecter</h1>
@@ -91,7 +73,6 @@ export default function SignIn(props: {updateCredentials?: any}){
                     : <p>{null}</p>
                 }
             </form>
-
         </div>
     )
 }
