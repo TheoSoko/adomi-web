@@ -1,4 +1,3 @@
-import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -6,47 +5,62 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useLocation, useNavigate } from 'react-router-dom';
-
-
+import { useLocation  } from 'react-router-dom'
+import { UserContext } from '../App';
+import { useContext } from 'react'
 
 
 export default function Navbar(){
-  const location = useLocation()
-  const navigate = useNavigate()
-
+    let location = useLocation()
+    const { credentials, updateCredentials } = useContext(UserContext);
 
     return (
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
-          <Toolbar>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{ mr: 2 }}
-            >
-              <MenuIcon />
-            </IconButton>
-              <Typography style={styles.homeButton} variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                <a href="home" style={{color:"white", textDecoration: "none"}}> A Do Mi </a>        
-              </Typography>    
-            <Button style={styles.navButton} color="inherit" href={location.pathname == '/home' ? "#why-join-us" : "/home#why-join-us"}>Pourquoi A Do Mi ?</Button>
-            <Button style={styles.navButton} color="inherit">Nous contacter</Button>
-            <Button style={styles.navButton} color="inherit" href='/client'>Espace client</Button>
-          </Toolbar>
-        </AppBar>
-      </Box>
+        <Box sx={{ flexGrow: 1 }}>
+          <AppBar position="static">
+            <Toolbar>
+              <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                sx={{ mr: 2 }}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography style={styles.homeButton} variant="h6" component="div">
+                <a href="/" style={styles.homeButtonText}> A Do Mi </a>
+              </Typography>
+              <div style={styles.rightButtonsDiv}>
+                <Button style={styles.navButton} color="inherit" href={location.pathname == '/' ? "#why-join-us" : "/#why-join-us"}>Pourquoi A Do Mi ?</Button>
+                <Button style={styles.navButton} color="inherit">Nous contacter</Button>
+                <Button style={styles.navButton} 
+                        color="inherit"
+                        href={ credentials?.id ? '/account' : '/account' }>
+                        { credentials?.id ? 'Compte' : 'Se connecter' } 
+                </Button>
+              </div>
+            </Toolbar>
+          </AppBar>
+        </Box>
     )
 }
 
 const styles = {
     homeButton:  {
-      marginInlineStart: -785,
+      paddingInlineStart: 15,
       fontSize: 25,
+    },
+    homeButtonText: {
+      color:"white", 
+      textDecoration: "none"
     },
     navButton: {
       marginInline: 11
+    },
+    rightButtonsDiv: {
+      flex: 1, 
+      display: 'flex', 
+      justifyContent: 'end',
+      paddingRight: 15
     }
 }
