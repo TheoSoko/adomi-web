@@ -16,6 +16,8 @@ export default function Account (props: {credentials:Credentials}){
             <Navbar/>
             <p style={styles.paragraph}>Ceci est votre page personnelle, vous pouvez y consulter vos informations</p>
             <p style={styles.paragraph}>Votre identifiant est : {props.credentials?.id}</p>
+            <p style={styles.paragraph}>Votre token est : {props.credentials?.token}</p>
+
         </div>
     )
 }
