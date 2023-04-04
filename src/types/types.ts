@@ -13,6 +13,24 @@ export type ContextArguments = {
   updateCredentials?: (cred: Credentials) => void
 }
 
+export type User = {
+	id?: number 
+  firstName: string	
+  lastName: string	
+  email: string	
+  phone: string	
+  street_name: string
+  street_number: string	
+  post_code: string
+  city: string
+  role: {
+    label: string
+  }
+  agency: {
+    name: string
+    adress: string
+  }
+}
 
 export type Error = {
   general: string | null

@@ -19,7 +19,6 @@ const initState = () => {
     }
 }
 
-/** Point d'entrée de l'application */
 function App(){
     //A chaque chargement du composant, 
     //on initialize le state "credentials" avec les élément du localstorage.
@@ -34,18 +33,19 @@ function App(){
 
     return (
         <UserContext.Provider value={{credentials, updateCredentials}}>
-            <Router/>
+          <Router/>
         </UserContext.Provider>
     )
 }
 
-
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
-root.render(
-    <React.StrictMode>
-      <App/>
-    </React.StrictMode>
-)
+/** Point d'entrée de l'application */
+ReactDOM
+  .createRoot(document.getElementById('root') as HTMLElement)
+  .render(
+      <React.StrictMode>
+        <App/>
+      </React.StrictMode>
+  )
 
 
 
