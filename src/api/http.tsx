@@ -36,6 +36,18 @@ export function serverTest(callback:(payload:{}) => void){
     .catch((err:AxiosError) => console.log(err))
 }
 
+export async function getUserProfile(idUser: number, callback: (user:any)=>void) {
+    // console.log("id = "+idUser)
+    const data = await axios.get('http://localhost:8000/customers/'+idUser)
+    .then((res) => callback(res))
+    .catch((err) => {
+        console.log(err)
+    })
+
+    return data
+
+}
+
 
 export function fetchCustomer(id: number, callback:(payloadOrErr:User|string) => void){
     axios.get(`http://localhost:8000/customers/${id}`)
