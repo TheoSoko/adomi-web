@@ -49,7 +49,7 @@ export default function SignIn(props: Props){
         serverSignIn({username: username, password: password}, (res) => {
             if (typeof res == 'object'){
                 setServerResponse(res)
-                //console.log(res)
+                console.log(res)
                 //navigate('/client/account', {state: {credentials: res}})
                 props?.clientNav && props.clientNav(res)
             }

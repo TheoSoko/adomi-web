@@ -3,8 +3,10 @@ import HomePageTest from '../pages/homePageTest'
 import HomePage from '../pages/homePage'
 import SignIn from '../pages/signIn'
 import Account from '../pages/account'
+import ContactPage from '../pages/contactTest';
 
 import { createBrowserRouter, Route, Link } from 'react-router-dom';
+
 
 type Credentials = {
   id:number,
@@ -53,6 +55,10 @@ const router = createBrowserRouter([
     path: "about",
     element: <div></div>,
   },
+  {
+    path:"contact_test",
+    element: <ContactPage/>
+  }
 ])
 
 export default router

@@ -33,7 +33,7 @@ export default function Navbar(){
                 <a href="home" style={{color:"white", textDecoration: "none"}}> A Do Mi </a>        
               </Typography>    
             <Button style={styles.navButton} color="inherit" href={location.pathname == '/home' ? "#why-join-us" : "/home#why-join-us"}>Pourquoi A Do Mi ?</Button>
-            <Button style={styles.navButton} color="inherit">Nous contacter</Button>
+            <Button style={styles.navButton} color="inherit" href="/contact_test">Nous contacter</Button>
             <Button style={styles.navButton} color="inherit" href='/client'>Espace client</Button>
           </Toolbar>
         </AppBar>
@@ -43,7 +43,7 @@ export default function Navbar(){
 
 const styles = {
     homeButton:  {
-      marginInlineStart: -785,
+      // marginInlineStart: -785,
       fontSize: 25,
     },
     navButton: {

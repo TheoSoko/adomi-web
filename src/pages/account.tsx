@@ -10,13 +10,23 @@ export default function Account (props:{credentials?:{id:number, token:string}})
     const navigate = useNavigate()
     const location = useLocation()
     const [id, setId] = useState<number>()
+    const [userData, setUserData] = useState<string | number[]>()
 
     useEffect(()=>{
         if (!props.credentials?.id){
             //return navigate('/sign-in')
         }
         setId(props.credentials!.id)
+
+        fetch("http://localhost:8000/customers/" + props.credentials?.id).then(response=> response.json()
+        ).then((data:any) => {
+        setUserData(data);
+        console.log(data);
+        }).catch((err)=>console.log(err.message))
     }, [])
+
+
+
 
     return (
         <div style={styles.container}>
