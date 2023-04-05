@@ -1,19 +1,54 @@
-import React from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import ReactDOM from 'react-dom/client';
 import './css/index.css';
 import reportWebVitals from './react/reportWebVitals';
-import { RouterProvider } from 'react-router-dom';
-import router from './router/router'
+import Router from './router/router'
+import { Credentials, ContextArguments } from './types/types'
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-)
 
-root.render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
-)
+export const UserContext = createContext<ContextArguments>({})
+
+const initState = () => {
+    let id = localStorage.getItem('id')
+    let token = localStorage.getItem('token')
+    if (id && token){
+        return { 
+                 id: parseInt(id), 
+                 token: token 
+               }
+    }
+}
+
+function App(){
+    //A chaque chargement du composant, 
+    //on initialize le state "credentials" avec les élément du localstorage.
+    //Ou pas si y'a rien.
+    const [credentials, updateCredentials] = useState<Credentials|undefined>(initState())
+
+    //A chaque fois que credentials est updaté :
+    useEffect(() => {
+        credentials?.id && localStorage.setItem('id', String(credentials.id))
+        credentials?.token && localStorage.setItem('token', credentials.token)
+    }, [credentials])
+
+    return (
+        <UserContext.Provider value={{credentials, updateCredentials}}>
+          <Router/>
+        </UserContext.Provider>
+    )
+}
+
+/** Point d'entrée de l'application */
+ReactDOM
+  .createRoot(document.getElementById('root') as HTMLElement)
+  .render(
+      <React.StrictMode>
+        <App/>
+      </React.StrictMode>
+  )
+
+
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

@@ -1,64 +1,43 @@
-import { useState, useEffect } from 'react';
+import { useContext } from 'react';
 import HomePageTest from '../pages/homePageTest'
 import HomePage from '../pages/homePage'
 import SignIn from '../pages/signIn'
 import Account from '../pages/account'
-import ContactPage from '../pages/contactTest';
+import { UserContext } from '../index'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+    
 
-import { createBrowserRouter, Route, Link } from 'react-router-dom';
+export default function Router (){
+  const { credentials, updateCredentials } = useContext(UserContext);
 
-
-type Credentials = {
-  id:number,
-  token:string
+  return (
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="rigolo" 
+            element= {<HomePageTest/>}
+          />
+          <Route
+            path="/"
+            element= {<HomePage/>}
+          />
+          <Route
+            path="sign-in"
+            element= {<SignIn/>}
+          />
+          <Route
+            path="account"
+            element= {
+                      credentials?.id && credentials.token
+                      ? <Account credentials={credentials}/>
+                      : <SignIn updateCredentials={updateCredentials}/>
+                    }
+          />
+          <Route
+            path="about"
+            element= {<div></div>}
+          />
+        </Routes>
+      </BrowserRouter>
+    )
 }
-
-function ClientRoot (props?:{credentials?: Credentials }){
-  const [credentials, setCredentials] = useState<Credentials>()
-
-  useEffect(()=>{
-    if (props?.credentials){
-      setCredentials(props?.credentials)
-    }
-  })
-
-  if (credentials){
-    return <Account credentials={credentials}/>
-  }
-  return <SignIn clientNav={(cred:Credentials) => cred && setCredentials(cred)}/>
-} 
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <HomePageTest/>
-  },
-  {
-    path: "home",
-    element: <HomePage/>
-  },
-  {
-    path: 'client',
-    element: <ClientRoot/>,
-    children: [
-      {
-        path: "sign-in",
-        element: <SignIn/>
-      },
-      {
-        path: "account",
-        element: <Account/>,
-      },
-    ],
-  },
-  {
-    path: "about",
-    element: <div></div>,
-  },
-  {
-    path:"contact_test",
-    element: <ContactPage/>
-  }
-])
-
-export default router

@@ -1,74 +1,31 @@
-import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 import Navbar from '../components/navbar'
 import FormControl from '@mui/material/FormControl';
 import FormHelperText from '@mui/material/FormHelperText';
 import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
 import Button from '@mui/material/Button'
-import {useState, useEffect, useRef, SetStateAction} from 'react'
-import { useNavigate, Link, useLocation } from "react-router-dom"
+import {useState} from 'react'
+import inputValidation from '../utils/validation'
 import {serverSignIn} from '../api/http'
-import { textAlign } from '@mui/system';
+import { Error } from '../types/types'
 
-const errorMessages = {
-    standard : [
-        'Nom d\'utilisateur ou mot de passe incorrect.',
-        'Le service est momentanément indisponible, veuillez réessayer plus tard.',
-    ],
-    username: 'Le nom d\'utilisateur est incorrect',
-    password: 'Le mot de passe est incorrect'
-}
 
-type ValueOf<T> = T[keyof T]
-type Error = {
-    standard: string | null
-    username: ValueOf<typeof errorMessages> | null // "string | null" pour les intimes 
-    password: ValueOf<typeof errorMessages> | null
-}
 
-type Credentials = {
-    id:number,
-    token:string
-  }  
-type Props = {
-    clientNav?: (cred:Credentials) => void
-}
-  
+export default function SignIn(props: {updateCredentials?: any}){
 
-export default function SignIn(props: Props){
-
-    const [errorList, setErrorList] = useState<Error>({standard:null, username:null, password:null})
+    const [errorList, setErrorList] = useState<Error>({general:null, username:null, password:null})
     const [username, setUsername] = useState<string>('')
     const [password, setPassword] = useState<string>('')
-    const [serverResponse, setServerResponse] = useState<{}>()
-    const navigate = useNavigate()
-    const location = useLocation()
-    
 
     const handleConnection = () => {
         serverSignIn({username: username, password: password}, (res) => {
             if (typeof res == 'object'){
-                setServerResponse(res)
-                console.log(res)
-                //navigate('/client/account', {state: {credentials: res}})
-                props?.clientNav && props.clientNav(res)
+                props.updateCredentials(res)
             }
-            if (res == '401'){
-                setErrorList({...errorList, standard: errorMessages.standard[0]})
-            }
-            if (res == '503'){
-                setErrorList({...errorList, standard: errorMessages.standard[1]})
+            if (typeof res == 'string'){
+                setErrorList({...errorList, general: res})
             }
         })
-    }
-    const handleInputError = (field: 'username' | 'password') => {
-        /*
-        if (false){
-            setErrorList({...errorList, username: errorMessages.password})
-            const toBeOrNotToBe = () => undefined
-            return ( true || false ) as unknown as typeof toBeOrNotToBe 
-        }
-        */
     }
 
 
@@ -77,48 +34,45 @@ export default function SignIn(props: Props){
             <Navbar/>
             <h1 style={styles.title}>Se connecter</h1>
             <form>
-                    <div style={styles.formField}>
-                        <FormControl error={Boolean(errorList.username)} variant="standard">
-                            <InputLabel htmlFor="username">Nom d'utilisateur</InputLabel>
-                            <Input
-                                id="username"
-                                aria-describedby="component-error-text"
-                                onBlur = {(event) => {
-                                    event.target.value.length == 0
-                                    ? setErrorList({...errorList, username: null})
-                                    : handleInputError('username')
-                                }}
-                                onChange = {(event) => setUsername(event.target.value)}
-                            />
-                            <FormHelperText id="component-error-text">{errorList.username}</FormHelperText>
-                        </FormControl>
-                    </div>
-                    <div style={styles.formField}>
-                        <FormControl error={Boolean(errorList.password)} variant="standard">
-                            <InputLabel htmlFor="password">Mot de passe</InputLabel>
-                            <Input
-                                id="password"
-                                type="password"
-                                aria-describedby="component-error-text"
-                                onBlur = {(event) => {
-                                    event.target.value.length == 0
-                                    ? setErrorList({...errorList, password: null})
-                                    : handleInputError('password')
-                                }}
-                                onChange = {(event) => setPassword(event.target.value)}
-                            />
-                        </FormControl>
-                        <FormHelperText style={styles.standardError}>{errorList.standard}</FormHelperText>
-                    </div>
+                <div style={styles.formField}>
+                    <FormControl error={Boolean(errorList.username)} variant="standard">
+                        <InputLabel htmlFor="username">Nom d'utilisateur</InputLabel>
+                        <Input
+                            id="username"
+                            aria-describedby="component-error-text"
+                            onBlur = {(event) => {
+                                event.target.value.length == 0
+                                ? setErrorList({...errorList, username: null})
+                                : inputValidation('username', event.target.value)
+                            }}
+                            onChange = {(event) => setUsername(event.target.value)}
+                        />
+                        <FormHelperText id="component-error-text">{errorList.username}</FormHelperText>
+                    </FormControl>
+                </div>
+                <div style={styles.formField}>
+                    <FormControl error={Boolean(errorList.password)} variant="standard">
+                        <InputLabel htmlFor="password">Mot de passe</InputLabel>
+                        <Input
+                            id="password"
+                            type="password"
+                            aria-describedby="component-error-text"
+                            onBlur = {(event) => {
+                                event.target.value.length == 0
+                                ? setErrorList({...errorList, password: null})
+                                : inputValidation('password', event.target.value)
+                            }}
+                            onChange = {(event) => setPassword(event.target.value)}
+                        />
+                    </FormControl>
+                    <FormHelperText style={styles.standardError}>{errorList.general}</FormHelperText>
+                </div>
                 {
                     (Boolean(username.length) && Boolean(password.length))
-                        ?
-                        <Button variant="contained" style={styles.button} onClick={() => handleConnection()}>Connexion</Button>
-                        :
-                        <p>{null}</p>
+                    ? <Button variant="contained" style={styles.button} onClick={() => handleConnection()}>Connexion</Button>
+                    : <p>{null}</p>
                 }
             </form>
-
         </div>
     )
 }
