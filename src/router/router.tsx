@@ -3,6 +3,7 @@ import HomePageTest from '../pages/homePageTest'
 import HomePage from '../pages/homePage'
 import SignIn from '../pages/signIn'
 import Account from '../pages/account'
+import Carers from '../pages/carers'
 import Contact from '../pages/contact'
 import { UserContext } from '../index'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -33,6 +34,14 @@ export default function Router (){
                       ? <Account credentials={credentials}/>
                       : <SignIn updateCredentials={updateCredentials}/>
                     }
+          />
+          <Route
+          path="my-carers"
+          element={
+            credentials?.id && credentials.token
+            ? <Carers credentials={credentials}/>
+            : <SignIn updateCredentials={updateCredentials}/>
+          }
           />
           <Route
             path="about"

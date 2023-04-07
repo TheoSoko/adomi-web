@@ -34,6 +34,18 @@ export function serverTest(callback:(payload:{}) => void){
 
 }
 
+export async function getUserProfile(idUser: number, callback: (user:any)=>void) {
+    // console.log("id = "+idUser)
+    const data = await axios.get('http://localhost:8000/customers/'+idUser)
+    .then((res) => callback(res))
+    .catch((err) => {
+        console.log(err)
+    })
+
+    return data
+
+}
+
 
 
 export async function fetchUserInfo (userId:number, onSuccess:(user: User) => void, onError:(err: string) => void) {

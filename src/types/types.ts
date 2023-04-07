@@ -38,6 +38,10 @@ export type Error = {
   password: string | null 
 }
 
+export type shortCarer = {
+  carersList:Array<string | number>
+}
+
 export type ApiErrorResponse = {
   error: string
   message: string
