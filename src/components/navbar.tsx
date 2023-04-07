@@ -32,7 +32,7 @@ export default function Navbar(){
               </Typography>
               <div style={styles.rightButtonsDiv}>
                 <Button style={styles.navButton} color="inherit" href={location.pathname == '/' ? "#why-join-us" : "/#why-join-us"}>Pourquoi A Do Mi ?</Button>
-                <Button style={styles.navButton} color="inherit">Nous contacter</Button>
+                <Button style={styles.navButton} color="inherit" href="contact">Nous contacter</Button>
                 <Button style={styles.navButton} 
                         color="inherit"
                         href={ credentials?.id ? '/account' : '/account' }>
