@@ -37,3 +37,7 @@ export type Error = {
   username: string | null 
   password: string | null 
 }
+
+export type shortCarer = {
+  carersList:Array<string | number>
+}
