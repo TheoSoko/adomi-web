@@ -5,6 +5,7 @@ import SignIn from '../pages/signIn'
 import Account from '../pages/account'
 import { UserContext } from '../index'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import CustomerCalendar from '../pages/customerCalendar';
     
 
 export default function Router (){
@@ -36,6 +37,10 @@ export default function Router (){
           <Route
             path="about"
             element= {<div></div>}
+          />
+          <Route
+            path="customer"
+            element= {<CustomerCalendar/>}
           />
         </Routes>
       </BrowserRouter>

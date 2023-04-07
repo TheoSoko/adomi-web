@@ -2,7 +2,7 @@ import Navbar from '../components/navbar'
 import Calendar from '../components/Calendar';
 
 
-export default function customerCalendar (){
+export default function CustomerCalendar(){
     
     
     return (
