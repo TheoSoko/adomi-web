@@ -6,7 +6,7 @@ import Account from '../pages/account'
 import Contact from '../pages/contact'
 import { UserContext } from '../index'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-    
+
 
 export default function Router (){
   const { credentials, updateCredentials } = useContext(UserContext);

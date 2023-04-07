@@ -21,6 +21,8 @@ export function serverSignIn(login:Login, callback:(payloadOrErr:{id:number,toke
                 console.log(err)
                 let errorData = err?.response?.data as responseData
                 callback(errorData.message)
+            } else {
+                callback('Une erreur de réseau est survenue')
             }
         })
 }
@@ -34,10 +36,12 @@ export function serverTest(callback:(payload:{}) => void){
         callback(response)
     })
     .catch((err:AxiosError) => console.log(err))
+
 }
 
 
 export function fetchCustomer(id: number, callback:(payloadOrErr:User|string) => void){
+
     axios.get(`http://localhost:8000/customers/${id}`)
         .then((response) => {
             callback(response.data)
@@ -49,4 +53,5 @@ export function fetchCustomer(id: number, callback:(payloadOrErr:User|string) =>
                 callback(errorData.message)
             }
         })
+        
 }
