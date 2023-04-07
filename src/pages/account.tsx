@@ -38,9 +38,11 @@ export default function Account (props: {credentials:Credentials}){
             for (const key in user){
                 let value = user[key as keyof typeof user]
                 if (typeof value !== 'object'){
-                    jsxArray.push(<li style={styles.infoListItem} key={reactKey ++}>
-                                    <span style={styles.listProperty}>{key} : </span><span>{value as string}</span>
-                                  </li>)
+                    jsxArray.push(
+                        <li style={styles.infoListItem} key={reactKey ++}>
+                          <span style={styles.listProperty}> {key} : </span><span> {value as string}</span>
+                        </li>
+                    )
                 }
             }
             return jsxArray

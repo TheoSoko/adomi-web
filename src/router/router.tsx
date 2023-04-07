@@ -5,7 +5,7 @@ import SignIn from '../pages/signIn'
 import Account from '../pages/account'
 import { UserContext } from '../index'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-    
+
 
 export default function Router (){
   const { credentials, updateCredentials } = useContext(UserContext);
