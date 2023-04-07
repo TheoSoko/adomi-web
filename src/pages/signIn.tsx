@@ -1,4 +1,5 @@
-import Navbar from '../components/navbar'
+import Navbar from '../components/navbar';
+import Footer from '../components/footer';
 import FormControl from '@mui/material/FormControl';
 import FormHelperText from '@mui/material/FormHelperText';
 import Input from '@mui/material/Input';
@@ -31,7 +32,9 @@ export default function SignIn(props: {updateCredentials?: any}){
 
     return(
         <div style={styles.container}>
+
             <Navbar/>
+
             <h1 style={styles.title}>Se connecter</h1>
             <form>
                 <div style={styles.formField}>
@@ -73,6 +76,9 @@ export default function SignIn(props: {updateCredentials?: any}){
                     : <p>{null}</p>
                 }
             </form>
+
+            <Footer/>
+            
         </div>
     )
 }

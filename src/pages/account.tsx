@@ -1,4 +1,5 @@
 import Navbar from '../components/navbar'
+import Footer from '../components/footer';
 import {useState, useEffect } from 'react'
 import { Credentials, User, ApiErrorResponse } from '../types/types'
 import UserData from '../components/userData';
@@ -10,7 +11,6 @@ export default function Account (props: {credentials:Credentials}){
     const [error, setError] = useState<string>()
     const [userinfo, setUserInfo] = useState<User>();
 
-
     useEffect(() => {
         fetchUserInfo(props.credentials.id, 
             (user) => user && setUserInfo(user), 
@@ -19,10 +19,10 @@ export default function Account (props: {credentials:Credentials}){
     }, [])
 
 
-
     return (
         <div style={styles.container}>
             <Navbar/>
+           <div style={styles.conteneurInfos}>
             <h1 style={styles.h1}>Ceci est votre page personnelle, vous pouvez y consulter vos informations.</h1>
             {
                 error ? <p style={styles.error}>{error} </p>
@@ -37,6 +37,8 @@ export default function Account (props: {credentials:Credentials}){
 
                     </div>
             }
+            </div>
+            <Footer/>
         </div>
     )
 }
@@ -45,6 +47,14 @@ export default function Account (props: {credentials:Credentials}){
 const styles = {
     container : {
         textAlign: "center" as const
+    },
+    conteneurInfos : {
+        minHeight: "70.6vh"
+    },
+    title : {
+        marginBlockStart: 60,
+        marginBlockEnd: 50,
+        fontSize: 37, 
     },
     h1 : {
         marginBlockStart: 75,

@@ -1,4 +1,5 @@
 import Navbar from '../components/navbar'
+import Footer from '../components/footer'
 
 export default function HomePage(){
     return(
@@ -26,6 +27,9 @@ export default function HomePage(){
                     que vous nous rejoignerez et nous donnerez votre {false && "argent et votre "}confiance.
                 </p>
             </div>
+
+            <Footer/>
+            
         </div>
     )
 }

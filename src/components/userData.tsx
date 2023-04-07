@@ -1,6 +1,8 @@
 import React from 'react'
+import { User, UserProp} from '../types/types';
 
-export default function displayUserInfo(props:any) {
+
+export default function displayUserInfo(props:UserProp) {
 
         const user = props.userinfo;
 
