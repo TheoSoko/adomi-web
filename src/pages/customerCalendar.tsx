@@ -1,5 +1,6 @@
 import Navbar from '../components/navbar'
 import Calendar from '../components/Calendar';
+import CalendarNew from '../components/CalendarNew'
 
 
 export default function CustomerCalendar(){
@@ -8,6 +9,7 @@ export default function CustomerCalendar(){
         <div style={styles.container}>
             <Navbar/>
             <Calendar/>
+            { /* <CalendarNew/> */ }
         </div>
     )
 }

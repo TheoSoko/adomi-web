@@ -9,16 +9,16 @@ import {
 
 const currentDate = '2018-11-01';
 const schedulerData = [
-  { startDate: '2018-11-01T09:45', endDate: '2018-11-01T11:00', title: 'Meeting' },
-  { startDate: '2018-11-01T12:00', endDate: '2018-11-01T13:30', title: 'Go to a gym' },
-];
+  { startDate: '2018-11-01T10:15', endDate: '2018-11-01T11:15', title: 'Rdv Josianne aide ménage' },
+  { startDate: '2018-11-01T14:00', endDate: '2018-11-01T16:00', title: 'Martine aide jardin' },
+]
 
 class Calendar extends React.Component {
   render() {
     return (
         <Paper>
           <Scheduler
-            // data={schedulerData}
+            data={schedulerData}
           >
             <ViewState
               currentDate={currentDate}

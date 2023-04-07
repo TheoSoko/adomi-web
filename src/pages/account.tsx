@@ -53,8 +53,8 @@ const styles = {
         fontSize: 27, 
     },
     h2 : {
-        marginBlockStart: 60,
-        marginBlockEnd: 53,
+        marginBlockStart: 58,
+        marginBlockEnd: 54,
         fontSize: 22, 
     },
     infoList: {
