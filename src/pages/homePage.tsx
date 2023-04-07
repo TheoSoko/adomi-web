@@ -1,4 +1,3 @@
-import Calendar from '../components/Calendar'
 import Navbar from '../components/navbar'
 
 export default function HomePage(){
@@ -27,7 +26,6 @@ export default function HomePage(){
                     que vous nous rejoignerez et nous donnerez votre {false && "argent et votre "}confiance.
                 </p>
             </div>
-            <Calendar/>
         </div>
     )
 }
