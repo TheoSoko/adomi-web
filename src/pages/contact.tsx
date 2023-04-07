@@ -1,19 +1,45 @@
 import Navbar from "../components/navbar";
 import { useEffect, useState } from "react";
 import contact from "../css/Contact.module.css";
+import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelopeOpenText } from '@fortawesome/free-solid-svg-icons'
 import { faPhone } from '@fortawesome/free-solid-svg-icons'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { User } from "../types/types";
+import TestCustomer from "../components/userData";
 
 
     const ContactPage = ()=>{
+
         const [formHide, setFormHide] = useState<boolean>();
         const [messValidation, setMessValidation] = useState<string>();
         const [messOk, setMessOk] = useState<boolean>()
         const [email, setEmail] = useState<string>();
         const [messBody, setMessBody] = useState<string>();
 
+        const customer = axios.create({
+            baseURL: "http://localhost:8000/customers/8"
+        });
+        const url = "http://localhost:8000/customers/8"
+    
+        const [userinfo, getUserInfo] = useState('');
+
+        useEffect(()=>{
+
+            fetchCustomer();
+        }, [])
+    
+        const fetchCustomer = ()=>{
+    
+            customer.get(url)
+            .then((response) => {
+                const userData = response.data
+                getUserInfo(userData);
+            })
+            .catch(error => console.log(error))
+        }
+        
         const showForm = (event:any)=>{
 
             event.preventDefault();
@@ -46,6 +72,8 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
             if(email && messBody){
 
                 setMessOk(true);
+
+                showForm(e);
 
                 setEmail('');
                 setMessBody('');
@@ -84,7 +112,7 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
                 <h2 style={{textAlign: "end"}}>ADoMi à votre service...</h2>
 
             </div>
-
+        
             <div className={contact.conteneur}>
 
                 <div className={contact.imageContact}>
@@ -120,6 +148,7 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
                 </div>
                 
             </div>
+
 
         </div>
     )

@@ -4,9 +4,10 @@ import HomePage from '../pages/homePage'
 import SignIn from '../pages/signIn'
 import Account from '../pages/account'
 import Carers from '../pages/carers'
+import Contact from '../pages/contact'
 import { UserContext } from '../index'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-    
+import CustomerCalendar from '../pages/customerCalendar';
 
 export default function Router (){
   const { credentials, updateCredentials } = useContext(UserContext);
@@ -45,6 +46,14 @@ export default function Router (){
           <Route
             path="about"
             element= {<div></div>}
+          />
+          <Route
+            path="calendar"
+            element= {<CustomerCalendar/>}
+          />
+          <Route
+            path="contact"
+            element={<Contact/>}
           />
         </Routes>
       </BrowserRouter>
