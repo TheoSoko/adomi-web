@@ -15,8 +15,9 @@ export type ContextArguments = {
 
 export type User = {
 	id?: number 
-  firstName: string	
-  lastName: string	
+  first_name: string	
+  last_name: string
+  user_name: string
   email: string	
   phone: string	
   street_name: string
@@ -38,6 +39,10 @@ export type Error = {
   password: string | null 
 }
 
+export type UserProp = {
+  userinfo: User
+}
+
 export type shortCarer = {
   carersList:Array<string | number>
 }
@@ -47,4 +52,3 @@ export type ApiErrorResponse = {
   message: string
   statusCode: number
 }
-
