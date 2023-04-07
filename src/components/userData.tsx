@@ -1,6 +1,8 @@
 import React from 'react'
+import { User, UserProp} from '../types/types';
 
-export default function displayUserInfo(props:any) {
+
+export default function displayUserInfo(props:UserProp) {
 
         const user = props.userinfo;
 
@@ -22,11 +24,11 @@ export default function displayUserInfo(props:any) {
             return (
                 <div style={style.conteneurInfos}>
 
-                    <p><b>Nom :</b> {user.firstName}</p>
+                    <p><b>Nom :</b> {user.first_name}</p>
 
-                    <p><b>Prénom :</b> {user.lastName}</p>
+                    <p><b>Prénom :</b> {user.last_name}</p>
 
-                    <p><b>Nom d'utilisateur :</b> {user.userName}</p>
+                    <p><b>Nom d'utilisateur :</b> {user.user_name}</p>
 
                     <p><b>E-mail :</b> {user.email}</p>
 

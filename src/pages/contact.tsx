@@ -1,4 +1,5 @@
 import Navbar from "../components/navbar";
+import Footer from "../components/footer";
 import { useEffect, useState } from "react";
 import contact from "../css/Contact.module.css";
 import axios from "axios";
@@ -149,7 +150,7 @@ import TestCustomer from "../components/userData";
                 
             </div>
 
-            <TestCustomer userinfo={userinfo}/>
+            <Footer/>
 
         </div>
     )

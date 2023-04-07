@@ -1,4 +1,5 @@
 import Navbar from '../components/navbar'
+import Footer from '../components/footer';
 import {useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Credentials, User } from '../types/types'
@@ -19,7 +20,7 @@ export default function Account (props: {credentials:Credentials}){
 
     const url = "http://localhost:8000/users/" + props.credentials.id
 
-    const [userinfo, setUserInfo] = useState('');
+    const [userinfo, setUserInfo] = useState<User>();
 
     useEffect(()=>{
 
@@ -57,14 +58,18 @@ export default function Account (props: {credentials:Credentials}){
     return (
         <div style={styles.container}>
             <Navbar/>
+
             <p style={styles.paragraph}>Ceci est votre page personnelle, vous pouvez y consulter vos informations.</p>
             <h1 style={styles.paragraph}>Vos informations personnelles: </h1>
             <ul style={styles.infoList}>
                 {
                     // displayUserInfo()
-                    <UserData userinfo={userinfo}/>
+                    (!userinfo)?  null : <UserData userinfo={userinfo}/>
+
                 }
             </ul>
+            
+            <Footer/>
         </div>
     )
 }
