@@ -2,8 +2,9 @@ import Navbar from '../components/navbar'
 import {useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Credentials, User } from '../types/types'
-import { fetchCustomer } from '../api/http'
+import axios from 'axios';
 import { JsxElement } from 'typescript';
+import UserData from '../components/userData';
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 
 
@@ -19,17 +20,27 @@ export default function Account (props: {credentials:Credentials}){
         return setCred(props.credentials)
     }, [])
 
-    useEffect(() => {
-        fetchCustomer(2, (response) => {
-            if (typeof response == 'string'){
-                console.log('erreur')
-                return setError(response)
-            } else {
-                console.log(response)
-                return setUser(response)
-            }
-        })
+    const userquery = axios.create({
+        baseURL: "http://localhost:8000/users/" + props.credentials.id
+    });
+    const url = "http://localhost:8000/users/" + props.credentials.id
+
+    const [userinfo, getUserInfo] = useState('');
+
+    useEffect(()=>{
+
+        fetchUserInfo();
     }, [])
+
+    const fetchUserInfo = ()=>{
+
+        userquery.get(url)
+        .then((response) => {
+            const userData = response.data
+            getUserInfo(userData);
+        })
+        .catch(error => console.log(error))
+    }
     
     const displayUserInfo = (): ReactJSXElement[]|null => {
         if (user){
@@ -55,7 +66,8 @@ export default function Account (props: {credentials:Credentials}){
             <h1 style={styles.paragraph}>Vos informations personnelles: </h1>
             <ul style={styles.infoList}>
                 {
-                    displayUserInfo()
+                    // displayUserInfo()
+                    <UserData userinfo={userinfo}/>
                 }
             </ul>
         </div>
