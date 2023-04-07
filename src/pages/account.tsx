@@ -7,9 +7,6 @@ import { JsxElement } from 'typescript';
 import UserData from '../components/userData';
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 
-
-
-
 export default function Account (props: {credentials:Credentials}){
     const [cred, setCred] = useState<Credentials>()
     const [user, setUser] = useState<User>()
@@ -20,12 +17,9 @@ export default function Account (props: {credentials:Credentials}){
         return setCred(props.credentials)
     }, [])
 
-    const userquery = axios.create({
-        baseURL: "http://localhost:8000/users/" + props.credentials.id
-    });
     const url = "http://localhost:8000/users/" + props.credentials.id
 
-    const [userinfo, getUserInfo] = useState('');
+    const [userinfo, setUserInfo] = useState('');
 
     useEffect(()=>{
 
@@ -34,10 +28,11 @@ export default function Account (props: {credentials:Credentials}){
 
     const fetchUserInfo = ()=>{
 
-        userquery.get(url)
+        axios.get(url)
         .then((response) => {
+            console.log(response)
             const userData = response.data
-            getUserInfo(userData);
+            setUserInfo(userData);
         })
         .catch(error => console.log(error))
     }
