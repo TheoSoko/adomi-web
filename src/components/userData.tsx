@@ -17,16 +17,15 @@ export default function displayUserInfo(props:any) {
         }
 
         if(user){
-            console.log(user)
 
             return (
                 <div style={style.conteneurInfos}>
 
-                    <p><b>Nom :</b> {user.firstName}</p>
+                    <p><b>Nom :</b> {user.first_name}</p>
 
-                    <p><b>Prénom :</b> {user.lastName}</p>
+                    <p><b>Prénom :</b> {user.last_name}</p>
 
-                    <p><b>Nom d'utilisateur :</b> {user.userName}</p>
+                    <p><b>Nom d'utilisateur :</b> {user.user_name}</p>
 
                     <p><b>E-mail :</b> {user.email}</p>
 
@@ -42,7 +41,6 @@ export default function displayUserInfo(props:any) {
             )
         }
         else{
-            console.log('nothing');
             return(
                 <div>
                     <p>Aucune information disponible pour le moment</p>

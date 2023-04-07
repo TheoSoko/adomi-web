@@ -14,21 +14,23 @@ const schedulerData = [
 ];
 
 class Calendar extends React.Component {
-  return() {
-  <Paper>
-    <Scheduler
-      // data={schedulerData}
-    >
-      <ViewState
-        currentDate={currentDate}
-      />
-      <DayView
-        startDayHour={9}
-        endDayHour={19}
-      />
-      <Appointments />
-    </Scheduler>
-  </Paper>
+  render() {
+    return (
+        <Paper>
+          <Scheduler
+            // data={schedulerData}
+          >
+            <ViewState
+              currentDate={currentDate}
+            />
+            <DayView
+              startDayHour={9}
+              endDayHour={19}
+            />
+            <Appointments />
+          </Scheduler>
+        </Paper>
+    )
   }
 }
 

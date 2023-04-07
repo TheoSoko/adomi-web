@@ -37,3 +37,10 @@ export type Error = {
   username: string | null 
   password: string | null 
 }
+
+export type ApiErrorResponse = {
+  error: string
+  message: string
+  statusCode: number
+}
+

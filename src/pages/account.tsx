@@ -1,72 +1,42 @@
 import Navbar from '../components/navbar'
 import {useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
-import { Credentials, User } from '../types/types'
-import axios from 'axios';
-import { JsxElement } from 'typescript';
+import { Credentials, User, ApiErrorResponse } from '../types/types'
 import UserData from '../components/userData';
-import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
+import { fetchUserInfo } from '../api/http'
+
 
 export default function Account (props: {credentials:Credentials}){
-    const [cred, setCred] = useState<Credentials>()
-    const [user, setUser] = useState<User>()
+    const [credentials, setCredentials] = useState<Credentials>()
     const [error, setError] = useState<string>()
-    const [first, setFirst] = useState<boolean>(true)
+    const [userinfo, setUserInfo] = useState<User>();
+
 
     useEffect(() => {
-        return setCred(props.credentials)
+        fetchUserInfo(props.credentials.id, 
+            (user) => user && setUserInfo(user), 
+            (error) => error && setError(error)
+        )
     }, [])
 
-    const url = "http://localhost:8000/users/" + props.credentials.id
 
-    const [userinfo, setUserInfo] = useState('');
-
-    useEffect(()=>{
-
-        fetchUserInfo();
-    }, [])
-
-    const fetchUserInfo = ()=>{
-
-        axios.get(url)
-        .then((response) => {
-            console.log(response)
-            const userData = response.data
-            setUserInfo(userData);
-        })
-        .catch(error => console.log(error))
-    }
-    
-    const displayUserInfo = (): ReactJSXElement[]|null => {
-        if (user){
-            let jsxArray = []
-            let reactKey = 0
-            for (const key in user){
-                let value = user[key as keyof typeof user]
-                if (typeof value !== 'object'){
-                    jsxArray.push(
-                        <li style={styles.infoListItem} key={reactKey ++}>
-                          <span style={styles.listProperty}> {key} : </span><span> {value as string}</span>
-                        </li>
-                    )
-                }
-            }
-            return jsxArray
-        }
-        return null
-    }
 
     return (
         <div style={styles.container}>
             <Navbar/>
-            <p style={styles.paragraph}>Ceci est votre page personnelle, vous pouvez y consulter vos informations.</p>
-            <h1 style={styles.paragraph}>Vos informations personnelles: </h1>
-            <ul style={styles.infoList}>
-                {
-                    // displayUserInfo()
-                    <UserData userinfo={userinfo}/>
-                }
-            </ul>
+            <h1 style={styles.h1}>Ceci est votre page personnelle, vous pouvez y consulter vos informations.</h1>
+            {
+                error ? <p style={styles.error}>{error} </p>
+                :
+                    <div>
+                        <h2 style={styles.h2}>Vos informations personnelles: </h2>
+                        <ul style={styles.infoList}>
+                            {
+                                userinfo ? <UserData userinfo={userinfo}/> : null
+                            }
+                        </ul>
+
+                    </div>
+            }
         </div>
     )
 }
@@ -76,16 +46,16 @@ const styles = {
     container : {
         textAlign: "center" as const
     },
-    title : {
-        marginBlockStart: 60,
-        marginBlockEnd: 50,
-        fontSize: 37, 
-    },
-    paragraph : {
+    h1 : {
         marginBlockStart: 75,
         marginBlockEnd: 50,
         marginInline: 'auto',
-        fontSize: 20, 
+        fontSize: 27, 
+    },
+    h2 : {
+        marginBlockStart: 60,
+        marginBlockEnd: 53,
+        fontSize: 22, 
     },
     infoList: {
         display: 'flex', 
@@ -102,6 +72,10 @@ const styles = {
         fontWeight: '600', 
         paddingRight: 5
     },
-    listValue: {
+    error: {
+        marginBlockStart: 80,
+        color: 'red',
+        fontWeight: '600',
+        fontSize: 19,
     }
 }

@@ -39,7 +39,7 @@ export default function Router (){
             element= {<div></div>}
           />
           <Route
-            path="customer"
+            path="calendar"
             element= {<CustomerCalendar/>}
           />
           <Route

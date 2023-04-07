@@ -4,7 +4,6 @@ import Calendar from '../components/Calendar';
 
 export default function CustomerCalendar(){
     
-    
     return (
         <div style={styles.container}>
             <Navbar/>

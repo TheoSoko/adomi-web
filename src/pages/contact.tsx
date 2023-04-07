@@ -149,7 +149,6 @@ import TestCustomer from "../components/userData";
                 
             </div>
 
-            <TestCustomer userinfo={userinfo}/>
 
         </div>
     )
