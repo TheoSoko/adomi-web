@@ -59,15 +59,18 @@ export default function Account (props: {credentials:Credentials}){
         <div style={styles.container}>
             <Navbar/>
 
-            <p style={styles.paragraph}>Ceci est votre page personnelle, vous pouvez y consulter vos informations.</p>
-            <h1 style={styles.paragraph}>Vos informations personnelles: </h1>
-            <ul style={styles.infoList}>
-                {
-                    // displayUserInfo()
-                    (!userinfo)?  null : <UserData userinfo={userinfo}/>
+            <div style={styles.conteneurInfos}>
+                <p style={styles.paragraph}>Ceci est votre page personnelle, vous pouvez y consulter vos informations.</p>
+                <h1 style={styles.paragraph}>Vos informations personnelles: </h1>
+                <ul style={styles.infoList}>
+                    {
+                        // displayUserInfo()
+                        (!userinfo)?  null : <UserData userinfo={userinfo}/>
 
-                }
-            </ul>
+                    }
+                </ul>
+
+            </div>
             
             <Footer/>
         </div>
@@ -78,6 +81,9 @@ export default function Account (props: {credentials:Credentials}){
 const styles = {
     container : {
         textAlign: "center" as const
+    },
+    conteneurInfos : {
+        minHeight: "70.6vh"
     },
     title : {
         marginBlockStart: 60,
