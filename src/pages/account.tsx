@@ -55,17 +55,17 @@ export default function Account (props: {credentials:Credentials}){
         return null
     }
 
+    console.log(userinfo);
+
     return (
         <div style={styles.container}>
             <Navbar/>
 
             <div style={styles.conteneurInfos}>
                 <p style={styles.paragraph}>Ceci est votre page personnelle, vous pouvez y consulter vos informations.</p>
-                <h1 style={styles.paragraph}>Vos informations personnelles: </h1>
                 <ul style={styles.infoList}>
                     {
-                        // displayUserInfo()
-                        (!userinfo)?  null : <UserData userinfo={userinfo}/>
+                        (!userinfo)?  null : <UserData {...userinfo}/>
 
                     }
                 </ul>

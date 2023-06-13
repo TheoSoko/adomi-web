@@ -14,7 +14,9 @@ type responseData = {
 export function serverSignIn(login:Login, callback:(payloadOrErr:{id:number,token:string}|string) => void){
     axios.post('http://localhost:8000/sign-in', login)
         .then((response) => {
-            callback(response.data)
+            // console.log(response.data);
+            callback(response.data);
+            window.location.href = "/account";
         })
         .catch((err?:AxiosError) => {
             if (err?.response){
@@ -41,6 +43,7 @@ export function fetchCustomer(id: number, callback:(payloadOrErr:User|string) =>
     axios.get(`http://localhost:8000/customers/${id}`)
         .then((response) => {
             callback(response.data)
+            console.log(response.data);
         })
         .catch((err:AxiosError) => {
             if (err?.response){

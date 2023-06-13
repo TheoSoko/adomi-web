@@ -16,7 +16,7 @@ export default function Navbar(){
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-          <AppBar position="static">
+          <AppBar position="fixed">
             <Toolbar>
               <IconButton
                 size="large"
@@ -35,7 +35,7 @@ export default function Navbar(){
                 <Button style={styles.navButton} color="inherit" href="contact">Nous contacter</Button>
                 <Button style={styles.navButton} 
                         color="inherit"
-                        href={ credentials?.id ? '/account' : '/account' }>
+                        href={ credentials?.id ? '/account' : '/sign-in' }>
                         { credentials?.id ? 'Compte' : 'Se connecter' } 
                 </Button>
               </div>

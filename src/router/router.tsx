@@ -24,7 +24,7 @@ export default function Router (){
           />
           <Route
             path="sign-in"
-            element= {<SignIn/>}
+            element= {<SignIn updateCredentials={updateCredentials}/>}
           />
           <Route
             path="account"
