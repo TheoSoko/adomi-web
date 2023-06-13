@@ -38,6 +38,11 @@ export default function Navbar(){
                         href={ credentials?.id ? '/account' : '/sign-in' }>
                         { credentials?.id ? 'Compte' : 'Se connecter' } 
                 </Button>
+                <Button style={styles.navButton} 
+                        color="inherit"
+                        href='/calendar'>
+                        Calendrier 
+                </Button>
               </div>
             </Toolbar>
           </AppBar>

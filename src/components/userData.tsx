@@ -19,7 +19,6 @@ export default function displayUserInfo(user:User) {
         }
 
         if(user){
-            console.log(user)
 
             return (
                 <div style={style.conteneurInfos}>
@@ -44,7 +43,6 @@ export default function displayUserInfo(user:User) {
             )
         }
         else{
-            console.log('nothing');
             return(
                 <div>
                     <p>Aucune information disponible pour le moment</p>

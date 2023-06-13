@@ -266,7 +266,6 @@ import TestCustomer from "../components/userData";
             </div>
 
             <Footer/>
-
         </div>
     )
     }

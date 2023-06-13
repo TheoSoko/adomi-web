@@ -42,3 +42,13 @@ export type Error = {
 export type UserProp = {
   userinfo: User
 }
+
+export type shortCarer = {
+  carersList:Array<string | number>
+}
+
+export type ApiErrorResponse = {
+  error: string
+  message: string
+  statusCode: number
+}
