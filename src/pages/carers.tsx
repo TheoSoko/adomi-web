@@ -2,7 +2,6 @@ import Navbar from '../components/navbar'
 import {useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Credentials, User, shortCarer} from '../types/types'
-import { fetchCustomer } from '../api/http'
 import { JsxElement } from 'typescript';
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 import Table from '@mui/material/Table';

@@ -6,7 +6,6 @@ import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelopeOpenText, faMap, faMapLocation } from '@fortawesome/free-solid-svg-icons'
 import { faPhone } from '@fortawesome/free-solid-svg-icons'
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { User } from "../types/types";
 import TestCustomer from "../components/userData";
 
@@ -258,7 +257,7 @@ import TestCustomer from "../components/userData";
                     </div>
 
                     <div>
-                        <p><FontAwesomeIcon icon={ faEnvelope}/>&nbsp;&nbsp;&nbsp;Email : adomi@versailles.com</p>
+                        <p><FontAwesomeIcon icon={ faEnvelopeOpenText}/>&nbsp;&nbsp;&nbsp;Email : adomi@versailles.com</p>
                     </div>
 
                 </div>

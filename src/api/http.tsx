@@ -24,6 +24,20 @@ export function serverSignIn(login:Login, callback:(payloadOrErr:{id:number,toke
         })
 }
 
+export function signOutTest(){
+
+    try{
+
+        window.localStorage.clear();
+
+        window.location.href = "/sign-in";
+    }
+    catch(err){
+        console.warn(err);
+    }
+
+}
+
 
 export function serverTest(callback:(payload:{}) => void){
     
