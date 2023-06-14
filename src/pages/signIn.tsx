@@ -9,10 +9,9 @@ import {useState} from 'react'
 import inputValidation from '../utils/validation'
 import {serverSignIn} from '../api/http'
 import { Error } from '../types/types'
+import { Credentials } from '../types/types';
 
-
-
-export default function SignIn(props: {updateCredentials?: any}){
+export default function SignIn(props: {updateCredentials: ((cred: Credentials) => void) | undefined}){
 
     const [errorList, setErrorList] = useState<Error>({general:null, username:null, password:null})
     const [username, setUsername] = useState<string>('')
@@ -20,7 +19,7 @@ export default function SignIn(props: {updateCredentials?: any}){
 
     const handleConnection = () => {
         serverSignIn({username: username, password: password}, (res) => {
-            if (typeof res == 'object'){
+            if (typeof res == 'object' && typeof props.updateCredentials != 'undefined'){
                 props.updateCredentials(res)
             }
             if (typeof res == 'string'){
@@ -29,14 +28,16 @@ export default function SignIn(props: {updateCredentials?: any}){
         })
     }
 
-
     return(
         <div style={styles.container}>
 
             <Navbar/>
+        <div style={styles.subContainer}>
 
             <h1 style={styles.title}>Se connecter</h1>
-            <form>
+
+            <form style={styles.formContainer}>
+
                 <div style={styles.formField}>
                     <FormControl error={Boolean(errorList.username)} variant="standard">
                         <InputLabel htmlFor="username">Nom d'utilisateur</InputLabel>
@@ -53,6 +54,7 @@ export default function SignIn(props: {updateCredentials?: any}){
                         <FormHelperText id="component-error-text">{errorList.username}</FormHelperText>
                     </FormControl>
                 </div>
+
                 <div style={styles.formField}>
                     <FormControl error={Boolean(errorList.password)} variant="standard">
                         <InputLabel htmlFor="password">Mot de passe</InputLabel>
@@ -70,13 +72,11 @@ export default function SignIn(props: {updateCredentials?: any}){
                     </FormControl>
                     <FormHelperText style={styles.standardError}>{errorList.general}</FormHelperText>
                 </div>
-                {
-                    (Boolean(username.length) && Boolean(password.length))
-                    ? <Button variant="contained" style={styles.button} onClick={() => handleConnection()}>Connexion</Button>
-                    : <p>{null}</p>
-                }
-            </form>
 
+                    <Button variant="contained" style={styles.button} onClick={() => handleConnection()}>Connexion</Button>
+
+            </form>
+    </div>
             <Footer/>
             
         </div>
@@ -87,9 +87,25 @@ const styles = {
     container : {
         textAlign: "center" as const
     },
+    subContainer:{
+        display:'flex',
+        flexDirection: "column" as any,
+        justifyContent: "center",
+        alignItems: "center",
+        minHeight: "90vh",
+
+    },
     title : {
-        marginBlockStart: 40,
-        marginBlockEnd: 50
+        marginTop:"2rem",
+        marginBottom:"2rem",
+
+    },
+    formContainer:{
+        backgroundColor: "#f5f8fa",
+        padding: "50px",
+        width: "35%",
+        boxShadow:"5px 5px 5px #dedede"
+
     },
     formField: {
         display:"block",

@@ -46,6 +46,8 @@ const styles = {
         //backgroundRepeat:"no-repeat",
         backgroundSize:"cover",
         height: "725px",
+        backgroundPositionY: "3.5rem",
+        backgroundRepeat: "no-repeat"
     },
     background2: {
         backgroundImage: "url(/background-home/toutPublic.jpg)",

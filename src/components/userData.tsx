@@ -2,9 +2,9 @@ import React from 'react'
 import { User, UserProp} from '../types/types';
 
 
-export default function displayUserInfo(props:UserProp) {
+export default function displayUserInfo(user:User) {
 
-        const user = props.userinfo;
+        // const user = props.userinfo;
 
         const style = {
             conteneurInfos : {

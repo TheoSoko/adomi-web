@@ -4,20 +4,28 @@ import { useEffect, useState } from "react";
 import contact from "../css/Contact.module.css";
 import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEnvelopeOpenText } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelopeOpenText, faMap, faMapLocation } from '@fortawesome/free-solid-svg-icons'
 import { faPhone } from '@fortawesome/free-solid-svg-icons'
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { User } from "../types/types";
 import TestCustomer from "../components/userData";
 
 
     const ContactPage = ()=>{
 
-        const [formHide, setFormHide] = useState<boolean>();
         const [messValidation, setMessValidation] = useState<string>();
-        const [messOk, setMessOk] = useState<boolean>()
+        const [messOk, setMessOk] = useState<boolean>();
+
+        const [nom, setNom] = useState<string>();
+        const [errNom, setErrNom] = useState<boolean>(false);
+
+        const [prenom, setPrenom] = useState<string>();
+        const [errPrenom, setErrPrenom] = useState<boolean>(false);
+
         const [email, setEmail] = useState<string>();
+        const [errEmail, setErremail] = useState<boolean>(false);
+
         const [messBody, setMessBody] = useState<string>();
+        const [errMessBody, setErrMessBody] = useState<boolean>(false);
 
         const customer = axios.create({
             baseURL: "http://localhost:8000/customers/8"
@@ -40,15 +48,49 @@ import TestCustomer from "../components/userData";
             })
             .catch(error => console.log(error))
         }
-        
-        const showForm = (event:any)=>{
 
-            event.preventDefault();
+        const onChangeNom = (event:any) =>{
 
-            setFormHide(!formHide);
             setMessValidation('');
-            setEmail('');
-            setMessBody('');
+            setNom(event.target.value);
+        }
+
+        const nomCheck = (event:any)=>{
+
+            if(!nom){
+
+                setErrNom(true);
+                setMessOk(false);
+
+            }
+            else{
+
+                setErrNom(false);
+                setMessOk(true);
+            }
+
+        }
+
+
+        const onChangePrenom = (event:any) =>{
+
+            setMessValidation('');
+            setPrenom(event.target.value);
+        }
+
+        const prenomCheck = (event:any)=>{
+
+            if(!prenom){
+
+                setErrPrenom(true);
+                setMessOk(false);
+
+            }
+            else{
+
+                setErrPrenom(false);
+                setMessOk(true);
+            }
 
         }
 
@@ -59,6 +101,27 @@ import TestCustomer from "../components/userData";
 
         }
 
+        const emailCheck = (event:any)=>{
+
+            if(email){
+
+                if(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)){
+
+                    setErremail(false);
+                    setMessOk(true);
+                }
+                else{
+
+                    setErremail(true);
+                    setMessOk(false);
+                }
+            }
+            else{
+                setErremail(true);
+                setMessOk(false);
+            }
+        }
+
         const onChangeMess = (event:any)=>{
 
             setMessValidation('')
@@ -66,86 +129,137 @@ import TestCustomer from "../components/userData";
 
         }
 
+        const messBodyCheck = (event:any)=>{
+
+            if(!messBody){
+                
+                setErrMessBody(true);
+                setMessOk(false);
+            }
+            else{
+
+                setErrMessBody(false);
+                setMessOk(true);
+            }
+        }
+
         const submitForm = (e:any)=>{
+
+            // console.log("validation form")
 
             e.preventDefault();
 
-            if(email && messBody){
+            nomCheck(e);
 
-                setMessOk(true);
+            prenomCheck(e);
 
-                showForm(e);
+            emailCheck(e);
 
-                setEmail('');
-                setMessBody('');
+            messBodyCheck(e);
+
+            if(messOk){
                 
                 setMessValidation('Votre message a bien été pris en compte ! (not)')
             }
             else{
-                
-                setMessOk(false);
 
-                setMessValidation('Veuillez renseigner tous les champs obligatoires !')
+                setMessValidation("Votre message n'a pas été soumis !");
             }
 
-
         }
-
-        // useEffect(()=>{
-        //     fetch("http://localhost:8000/customers").then((response) => response.json()).then((data) => {
-
-        //         // console.log(data);
-
-        //         setCustomers(data);
-
-        //     }).catch((err)=>
-
-        //         console.log(err.message)
-
-        //     )
-        // }, []);
 
     return (
         <div>
             <Navbar/>
             <div className={contact.backgroundHeader}>
 
-                <h2 style={{textAlign: "end"}}>ADoMi à votre service...</h2>
+                {/* <h2 className={contact.headerTitle}>Contact</h2> */}
 
-            </div>
+            </div>                
+            
+
         
             <div className={contact.conteneur}>
 
-                <div className={contact.imageContact}>
-                </div>
-
-                <div className={contact.conteneurCoordonnees}>
+            <div className={contact.title}>
                     
-                    <h2 style={{textAlign: "center"}}>Nos coordonnées</h2>
+                <h2>Une question ? Contactez-nous :)</h2>
+                <p>Vous pouvez contacter Adomi à l'aide du formulaire de contact, par téléphone ou par voie postale.</p>
+            </div>
 
-                    <p><a href="#" className={contact.bouttonShowForm}><FontAwesomeIcon icon={faEnvelopeOpenText} onClick={(event)=>showForm(event)}/></a>&nbsp;&nbsp;adomi@greve_sncf.com</p>
+                <div className={contact.subConteneur1}> 
 
-                    <small className={(messOk)? contact.validationMess : contact.errMess}>{messValidation}</small>
+                    
                    
-                    <form className={formHide? contact.formMessage : contact.formMessage2 } onSubmit={(e)=>submitForm(e)}hidden>
+                    <form className={contact.formMessage } onSubmit={(e)=>submitForm(e)}>
 
-                        <label>
-                            E-mail :&nbsp;&nbsp;
-                        </label> <input type="text" name="email" value={email? email : ''} onChange={(event)=>onChangeEmail(event)}></input>
+                        <div>
+                            <label htmlFor="nom">
+                                Nom :
+                            </label>
+                            <input type="text" name="nom" id="nom" className={errNom? contact.errInput : ""} maxLength={30} onChange={(event)=>onChangeNom(event)}></input>
+                            <small className={errNom? contact.errMessInput : contact.errMessOff}>Veuillez entrer un nom valide !</small>
+                        </div>
 
-
-                        <label>
-                            Votre message :&nbsp;&nbsp;
-                        </label>
-                        <textarea value={messBody} onChange={(event)=>onChangeMess(event)}/>
+                        <div>
+                            <label>
+                                Prénom :
+                            </label>
+                            <input type="text" name="nom" maxLength={30} onChange={(event)=>onChangePrenom(event)}></input>
+                            <small className={errPrenom? contact.errMessInput : contact.errMessOff}>Veuillez entrer un prénom valide !</small>
+                            
+                        </div>
                         
-                        <button>Envoyer</button>
+                        <div>
+                            <label>
+                                E-mail :&nbsp;&nbsp;
+                            </label> 
+                            <input type="email" name="email" value={email? email : ''} onChange={(event)=>onChangeEmail(event)} ></input>
+                            <small className={errEmail? contact.errMessInput : contact.errMessOff}>Veuillez entrer un email valide !</small>
+                        </div>
+
+                        <div>
+                            <label>
+                                Objet :
+                            </label>
+                            <input type="text" name="nom" maxLength={100}></input>
+                        </div>
+
+                        <div className={contact.messText}>
+                            <label>
+                                Votre message :&nbsp;&nbsp;
+                            </label>
+                            <textarea value={messBody} onChange={(event)=>onChangeMess(event)} maxLength={400}/>
+                            <small className={errMessBody? contact.errMessInput : contact.errMessOff}>Veuillez entrer un corps de message !</small>
+                        </div>
+                        
+                        <div>
+
+                            <button onClick={(e)=>submitForm(e)}>Envoyer</button>
+                            <small className={(messOk)? contact.validationMess : contact.errMess}>{messValidation}</small>
+
+                            
+
+                        </div>
 
                     </form>
-
-                    <p><FontAwesomeIcon icon={faPhone} />&nbsp;&nbsp;0102030405</p>
-                    <p><FontAwesomeIcon icon={faEnvelope} />&nbsp;&nbsp;Adomi, 2 rue de la forêt 78200</p>
                     
+                </div>
+
+                <div className={contact.subConteneur2}>
+
+                    <div>
+                        <p><FontAwesomeIcon icon={ faPhone}/>&nbsp;&nbsp;&nbsp;Standard téléphonique : 01.02.03.04.05</p>
+                    </div>
+
+                    <div>
+                        <p><FontAwesomeIcon icon={ faMap}/>&nbsp;&nbsp;&nbsp;Adresse : 4 rue des alternants 78200 Mantes-la-ville</p>
+                    </div>
+
+                    <div>
+                        <p><FontAwesomeIcon icon={ faEnvelopeOpenText}/>&nbsp;&nbsp;&nbsp;Email : adomi@versailles.com</p>
+                    </div>
+
                 </div>
                 
             </div>

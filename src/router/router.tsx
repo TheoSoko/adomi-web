@@ -8,6 +8,7 @@ import Contact from '../pages/contact'
 import { UserContext } from '../index'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import CustomerCalendar from '../pages/customerCalendar';
+import { sign } from 'crypto';
 
 export default function Router (){
   const { credentials, updateCredentials } = useContext(UserContext);
@@ -25,7 +26,7 @@ export default function Router (){
           />
           <Route
             path="sign-in"
-            element= {<SignIn/>}
+            element= {<SignIn updateCredentials={updateCredentials}/>}
           />
           <Route
             path="account"
