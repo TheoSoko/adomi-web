@@ -59,10 +59,6 @@ export default function Navbar(){
     setResponsiveness();
     window.addEventListener("resize", ()=> setResponsiveness());
 
-    return () =>{
-      window.removeEventListener("resize", ()=> setResponsiveness());
-    }
-
   }, []);
 
 
@@ -192,10 +188,6 @@ const styles = {
     homeButtonText: {
       color:"white", 
       textDecoration: "none",
-      "@media (maxWidth: 900px)": {
-        fontSize: "10rem"
-
-      },
     },
     navButton: {
       marginInline: 11,
@@ -222,6 +214,9 @@ const styles = {
       fontSize: "2.4rem",
       color:"white", 
       textDecoration: "none",
+    },
+    drawerStyle:{
+      backgroundColor: 'blue'
     }
 
 }

@@ -10,6 +10,7 @@ import inputValidation from '../utils/validation'
 import {serverSignIn} from '../api/http'
 import { Error } from '../types/types'
 import { Credentials } from '../types/types';
+import SignInStyle from '../css/SignInStyle.module.css'
 
 export default function SignIn(props: {updateCredentials: ((cred: Credentials) => void) | undefined}){
 
@@ -29,16 +30,16 @@ export default function SignIn(props: {updateCredentials: ((cred: Credentials) =
     }
 
     return(
-        <div style={styles.container}>
+        <div className={SignInStyle.container}>
 
             <Navbar/>
-        <div style={styles.subContainer}>
+        <div className={SignInStyle.subContainer}>
 
-            <h1 style={styles.title}>Se connecter</h1>
+            <h1 className={SignInStyle.title}>Se connecter</h1>
 
-            <form style={styles.formContainer}>
+            <form className={SignInStyle.formContainer}>
 
-                <div style={styles.formField}>
+                <div className={SignInStyle.formField}>
                     <FormControl error={Boolean(errorList.username)} variant="standard">
                         <InputLabel htmlFor="username">Nom d'utilisateur</InputLabel>
                         <Input
@@ -55,7 +56,7 @@ export default function SignIn(props: {updateCredentials: ((cred: Credentials) =
                     </FormControl>
                 </div>
 
-                <div style={styles.formField}>
+                <div className={SignInStyle.formField}>
                     <FormControl error={Boolean(errorList.password)} variant="standard">
                         <InputLabel htmlFor="password">Mot de passe</InputLabel>
                         <Input
@@ -70,10 +71,10 @@ export default function SignIn(props: {updateCredentials: ((cred: Credentials) =
                             onChange = {(event) => setPassword(event.target.value)}
                         />
                     </FormControl>
-                    <FormHelperText style={styles.standardError}>{errorList.general}</FormHelperText>
+                    <FormHelperText className={SignInStyle.standardError}>{errorList.general}</FormHelperText>
                 </div>
 
-                    <Button variant="contained" style={styles.button} onClick={() => handleConnection()}>Connexion</Button>
+                    <Button variant="contained" className={SignInStyle.button} onClick={() => handleConnection()}>Connexion</Button>
 
             </form>
     </div>

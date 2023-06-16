@@ -7,6 +7,8 @@ import axios from 'axios';
 import { JsxElement } from 'typescript';
 import UserData from '../components/userData';
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
+import AccountStyle from '../css/AccountStyle.module.css'
+
 
 export default function Account (props: {credentials:Credentials}){
     const [cred, setCred] = useState<Credentials>()
@@ -37,37 +39,19 @@ export default function Account (props: {credentials:Credentials}){
         })
         .catch(error => console.log(error))
     }
-    
-    const displayUserInfo = (): ReactJSXElement[]|null => {
-        if (user){
-            let jsxArray = []
-            let reactKey = 0
-            for (const key in user){
-                let value = user[key as keyof typeof user]
-                if (typeof value !== 'object'){
-                    jsxArray.push(<li style={styles.infoListItem} key={reactKey ++}>
-                                    <span style={styles.listProperty}>{key} : </span><span>{value as string}</span>
-                                  </li>)
-                }
-            }
-            return jsxArray
-        }
-        return null
-    }
 
     return (
-        <div style={styles.container}>
+        <div >
             <Navbar/>
 
-            <div style={styles.conteneurInfos}>
-                <p style={styles.paragraph}>Ceci est votre page personnelle, vous pouvez y consulter vos informations.</p>
-                <h1 style={styles.paragraph}>Vos informations personnelles: </h1>
-                <ul style={styles.infoList}>
+            <div className={AccountStyle.container}>
+                <h1 className={AccountStyle.title}>Vos informations personnelles: </h1>
+                <div className={AccountStyle.conteneurInfos}>
                     {
                         (!userinfo)?  null : <UserData {...userinfo}/>
 
                     }
-                </ul>
+                </div>
 
             </div>
             

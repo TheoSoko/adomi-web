@@ -7,21 +7,18 @@ export default function displayUserInfo(user:User) {
         // const user = props.userinfo;
 
         const style = {
-            conteneurInfos : {
-                backgroundColor : '#ebebeb',
-                width: '45%',
+            listInfo : {
                 display : 'flex',
                 flexFlow : 'column',
                 justifyContent : 'space-around',
-                alignItems : 'center',
-                margin: "0px auto 20px auto"
+                alignItems : 'flex-start',
             }
         }
 
         if(user){
 
             return (
-                <div style={style.conteneurInfos}>
+                <ul style={style.listInfo}>
 
                     <p><b>Nom :</b> {user.first_name}</p>
 
@@ -38,7 +35,7 @@ export default function displayUserInfo(user:User) {
                     <p><b>Code postal :</b> {user.post_code}</p>
                     
                     <p><b>Ville :</b> {user.city}</p>
-                </div>
+                </ul>
             
             )
         }

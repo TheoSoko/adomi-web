@@ -1,7 +1,7 @@
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import { useEffect, useState } from "react";
-import contact from "../css/Contact.module.css";
+import ContactStyle from "../css/ContactStyle.module.css";
 import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelopeOpenText, faMap, faMapLocation } from '@fortawesome/free-solid-svg-icons'
@@ -171,34 +171,34 @@ import TestCustomer from "../components/userData";
     return (
         <div>
             <Navbar/>
-            <div className={contact.backgroundHeader}>
+            <div className={ContactStyle.backgroundHeader}>
 
-                {/* <h2 className={contact.headerTitle}>Contact</h2> */}
+                {/* <h2 className={ContactStyle.headerTitle}>Contact</h2> */}
 
             </div>                
             
 
         
-            <div className={contact.conteneur}>
+            <div className={ContactStyle.conteneur}>
 
-            <div className={contact.title}>
+            <div className={ContactStyle.title}>
                     
                 <h2>Une question ? Contactez-nous :)</h2>
                 <p>Vous pouvez contacter Adomi à l'aide du formulaire de contact, par téléphone ou par voie postale.</p>
             </div>
 
-                <div className={contact.subConteneur1}> 
+                <div className={ContactStyle.subConteneur1}> 
 
                     
                    
-                    <form className={contact.formMessage } onSubmit={(e)=>submitForm(e)}>
+                    <form className={ContactStyle.formMessage } onSubmit={(e)=>submitForm(e)}>
 
                         <div>
                             <label htmlFor="nom">
                                 Nom :
                             </label>
-                            <input type="text" name="nom" id="nom" className={errNom? contact.errInput : ""} maxLength={30} onChange={(event)=>onChangeNom(event)}></input>
-                            <small className={errNom? contact.errMessInput : contact.errMessOff}>Veuillez entrer un nom valide !</small>
+                            <input type="text" name="nom" id="nom" className={errNom? ContactStyle.errInput : ""} maxLength={30} onChange={(event)=>onChangeNom(event)}></input>
+                            <small className={errNom? ContactStyle.errMessInput : ContactStyle.errMessOff}>Veuillez entrer un nom valide !</small>
                         </div>
 
                         <div>
@@ -206,7 +206,7 @@ import TestCustomer from "../components/userData";
                                 Prénom :
                             </label>
                             <input type="text" name="nom" maxLength={30} onChange={(event)=>onChangePrenom(event)}></input>
-                            <small className={errPrenom? contact.errMessInput : contact.errMessOff}>Veuillez entrer un prénom valide !</small>
+                            <small className={errPrenom? ContactStyle.errMessInput : ContactStyle.errMessOff}>Veuillez entrer un prénom valide !</small>
                             
                         </div>
                         
@@ -215,7 +215,7 @@ import TestCustomer from "../components/userData";
                                 E-mail :&nbsp;&nbsp;
                             </label> 
                             <input type="email" name="email" value={email? email : ''} onChange={(event)=>onChangeEmail(event)} ></input>
-                            <small className={errEmail? contact.errMessInput : contact.errMessOff}>Veuillez entrer un email valide !</small>
+                            <small className={errEmail? ContactStyle.errMessInput : ContactStyle.errMessOff}>Veuillez entrer un email valide !</small>
                         </div>
 
                         <div>
@@ -225,18 +225,18 @@ import TestCustomer from "../components/userData";
                             <input type="text" name="nom" maxLength={100}></input>
                         </div>
 
-                        <div className={contact.messText}>
+                        <div className={ContactStyle.messText}>
                             <label>
                                 Votre message :&nbsp;&nbsp;
                             </label>
                             <textarea value={messBody} onChange={(event)=>onChangeMess(event)} maxLength={400}/>
-                            <small className={errMessBody? contact.errMessInput : contact.errMessOff}>Veuillez entrer un corps de message !</small>
+                            <small className={errMessBody? ContactStyle.errMessInput : ContactStyle.errMessOff}>Veuillez entrer un corps de message !</small>
                         </div>
                         
                         <div>
 
                             <button onClick={(e)=>submitForm(e)}>Envoyer</button>
-                            <small className={(messOk)? contact.validationMess : contact.errMess}>{messValidation}</small>
+                            <small className={(messOk)? ContactStyle.validationMess : ContactStyle.errMess}>{messValidation}</small>
 
                             
 
@@ -246,7 +246,7 @@ import TestCustomer from "../components/userData";
                     
                 </div>
 
-                <div className={contact.subConteneur2}>
+                <div className={ContactStyle.subConteneur2}>
 
                     <div>
                         <p><FontAwesomeIcon icon={ faPhone}/>&nbsp;&nbsp;&nbsp;Standard téléphonique : 01.02.03.04.05</p>

@@ -31,7 +31,46 @@
     align-items: flex-end;
     /* background-color: #1976D2; */
     background-image: url("../../public/img-contact/contact_header.jpg");
+    background-repeat: no-repeat;
     /* opacity: 0; */
+
+}
+
+@media (max-width: 900px){
+
+    .backgroundHeader{
+        background-size: cover;
+        height: 35vh;
+        background-position: top;
+        background-position-x: -45rem;
+        background-position-y: 2.2rem;
+    }
+
+    .conteneur{
+        flex-direction: column;
+    }
+
+    .subConteneur1{
+        width: 80%!important;
+    }
+
+    .subConteneur2{
+        width: 90%!important;
+        margin-top: 0.3rem!important;
+    }
+
+    .formMessage div{
+        margin-bottom: 1.5rem!important;
+    }
+
+    .formMessage button{
+        padding: 0.7rem!important;
+        width: 70%!important;
+    }
+
+    .subConteneur2 div{
+        font-size:1.2rem!important;
+    }
 
 }
 
