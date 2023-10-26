@@ -14,6 +14,11 @@ export default function Navbar(){
     let location = useLocation()
     const { credentials, updateCredentials } = useContext(UserContext);
 
+    const navBtnStyle = () => {
+      return credentials?.id ? { marginInline: 11, color: 'white'} : { marginInline: 11, color: '#bfbfbf'}
+    }
+
+
     return (
         <Box sx={{ flexGrow: 1 }}>
           <AppBar position="static">
@@ -38,11 +43,15 @@ export default function Navbar(){
                         href={ credentials?.id ? '/account' : '/account' }>
                         { credentials?.id ? 'Compte' : 'Se connecter' } 
                 </Button>
-                <Button style={styles.navButton} 
-                        color="inherit"
-                        href='/calendar'>
-                        Calendrier 
-                </Button>
+                {
+                  credentials?.id ?
+                  <Button style={navBtnStyle()} 
+                    href={'/calendar'}>
+                    Calendrier 
+                  </Button>
+                  :
+                  null
+                }
               </div>
             </Toolbar>
           </AppBar>

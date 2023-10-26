@@ -7,7 +7,7 @@ import Carers from '../pages/carers'
 import Contact from '../pages/contact'
 import { UserContext } from '../index'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import CustomerCalendar from '../pages/customerCalendar';
+import CalendarPage from '../pages/calendarPage';
 
 export default function Router (){
   const { credentials, updateCredentials } = useContext(UserContext);
@@ -49,7 +49,7 @@ export default function Router (){
           />
           <Route
             path="calendar"
-            element= {<CustomerCalendar/>}
+            element= {<CalendarPage credentials={credentials}/>}
           />
           <Route
             path="contact"

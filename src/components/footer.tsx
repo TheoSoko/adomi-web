@@ -4,11 +4,11 @@ function Footer() {
 
     const style = {
         conteneurFooter : {
+            marginBlockStart: 55,
             backgroundColor: "#1976D2",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            
         },
 
         textFooter : {
@@ -19,7 +19,6 @@ function Footer() {
   return (
     <div style={style.conteneurFooter}>
         <p style={style.textFooter}>&copy;A Do Mi - 2023 - Tous droits réservés</p>
-      
     </div>
   )
 }

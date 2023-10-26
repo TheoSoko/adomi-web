@@ -9,11 +9,11 @@ import { fetchUserInfo } from '../api/http'
 export default function Account (props: {credentials:Credentials}){
     const [credentials, setCredentials] = useState<Credentials>()
     const [error, setError] = useState<string>()
-    const [userinfo, setUserInfo] = useState<User>();
+    const [userinfo, setUserInfo] = useState<User>()
 
     useEffect(() => {
-        fetchUserInfo(props.credentials.id, 
-            (user) => user && setUserInfo(user), 
+        fetchUserInfo(props.credentials.id, props.credentials.token,
+            (user) => user && setUserInfo(user),
             (error) => error && setError(error)
         )
     }, [])

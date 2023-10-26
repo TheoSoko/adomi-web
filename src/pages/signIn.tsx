@@ -10,7 +10,7 @@ import inputValidation from '../utils/validation'
 import {serverSignIn} from '../api/http'
 import { Error } from '../types/types'
 
-
+//Regtheman404*
 
 export default function SignIn(props: {updateCredentials?: any}){
 
@@ -35,50 +35,51 @@ export default function SignIn(props: {updateCredentials?: any}){
 
             <Navbar/>
 
-            <h1 style={styles.title}>Se connecter</h1>
-            <form>
-                <div style={styles.formField}>
-                    <FormControl error={Boolean(errorList.username)} variant="standard">
-                        <InputLabel htmlFor="username">Nom d'utilisateur</InputLabel>
-                        <Input
-                            id="username"
-                            aria-describedby="component-error-text"
-                            onBlur = {(event) => {
-                                event.target.value.length == 0
-                                ? setErrorList({...errorList, username: null})
-                                : inputValidation('username', event.target.value)
-                            }}
-                            onChange = {(event) => setUsername(event.target.value)}
-                        />
-                        <FormHelperText id="component-error-text">{errorList.username}</FormHelperText>
-                    </FormControl>
+                <div style={styles.conteneurInfos}>
+                    <h1 style={styles.title}>Se connecter</h1>
+                    <form>
+                        <div style={styles.formField}>
+                            <FormControl error={Boolean(errorList.username)} variant="standard">
+                                <InputLabel htmlFor="username">Nom d'utilisateur</InputLabel>
+                                <Input
+                                    id="username"
+                                    aria-describedby="component-error-text"
+                                    onBlur = {(event) => {
+                                        event.target.value.length == 0
+                                        ? setErrorList({...errorList, username: null})
+                                        : inputValidation('username', event.target.value)
+                                    }}
+                                    onChange = {(event) => setUsername(event.target.value)}
+                                />
+                                <FormHelperText id="component-error-text">{errorList.username}</FormHelperText>
+                            </FormControl>
+                        </div>
+                        <div style={styles.formField}>
+                            <FormControl error={Boolean(errorList.password)} variant="standard">
+                                <InputLabel htmlFor="password">Mot de passe</InputLabel>
+                                <Input
+                                    id="password"
+                                    type="password"
+                                    aria-describedby="component-error-text"
+                                    onBlur = {(event) => {
+                                        event.target.value.length == 0
+                                        ? setErrorList({...errorList, password: null})
+                                        : inputValidation('password', event.target.value)
+                                    }}
+                                    onChange = {(event) => setPassword(event.target.value)}
+                                />
+                            </FormControl>
+                            <FormHelperText style={styles.standardError}>{errorList.general}</FormHelperText>
+                        </div>
+                        {
+                            (Boolean(username.length) && Boolean(password.length))
+                            ? <Button variant="contained" style={styles.button} onClick={() => handleConnection()}>Connexion</Button>
+                            : <p>{null}</p>
+                        }
+                    </form>
                 </div>
-                <div style={styles.formField}>
-                    <FormControl error={Boolean(errorList.password)} variant="standard">
-                        <InputLabel htmlFor="password">Mot de passe</InputLabel>
-                        <Input
-                            id="password"
-                            type="password"
-                            aria-describedby="component-error-text"
-                            onBlur = {(event) => {
-                                event.target.value.length == 0
-                                ? setErrorList({...errorList, password: null})
-                                : inputValidation('password', event.target.value)
-                            }}
-                            onChange = {(event) => setPassword(event.target.value)}
-                        />
-                    </FormControl>
-                    <FormHelperText style={styles.standardError}>{errorList.general}</FormHelperText>
-                </div>
-                {
-                    (Boolean(username.length) && Boolean(password.length))
-                    ? <Button variant="contained" style={styles.button} onClick={() => handleConnection()}>Connexion</Button>
-                    : <p>{null}</p>
-                }
-            </form>
 
             <Footer/>
-            
         </div>
     )
 }
@@ -103,5 +104,9 @@ const styles = {
     },
     button: {
         marginBlockStart: 10,
-    }
+    },
+    conteneurInfos : {
+        minHeight: "70.6vh"
+    },
+
 }

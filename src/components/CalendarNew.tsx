@@ -1,6 +1,7 @@
 import react, { useState } from 'react';
 import Paper from '@mui/material/Paper';
 import { ViewState, SchedulerProps, EditingState, ChangeSet } from '@devexpress/dx-react-scheduler';
+import { Credentials } from '../types/types'
 import {
   Scheduler,
   DayView,
@@ -16,6 +17,7 @@ const views= ['day', 'week', 'workWeek', 'month']
 
 
 export default function CalendarNew () {
+
 
     const [data, setData] = useState<any>()
     const [currentDate, setCurrentDate] = useState('2018-11-02')
