@@ -4,6 +4,7 @@ import {useState, useEffect } from 'react'
 import { Credentials, User, ApiErrorResponse } from '../types/types'
 import UserData from '../components/userData';
 import { fetchUserInfo } from '../api/http'
+import AccountStyle from '../css/AccountStyle.module.css'
 
 
 export default function Account (props: {credentials:Credentials}){
@@ -19,24 +20,19 @@ export default function Account (props: {credentials:Credentials}){
     }, [])
 
     return (
-        <div style={styles.container}>
+        <div >
             <Navbar/>
-           <div style={styles.conteneurInfos}>
-            <h1 style={styles.h1}>Ceci est votre page personnelle, vous pouvez y consulter vos informations.</h1>
-            {
-                error ? <p style={styles.error}>{error} </p>
-                :
-                    <div>
-                        <h2 style={styles.h2}>Vos informations personnelles: </h2>
-                        <ul style={styles.infoList}>
-                            {
-                                userinfo ? <UserData user={userinfo}/> : null
-                            }
-                        </ul>
 
-                    </div>
-            }
+            <div className={AccountStyle.container}>
+                <h1 className={AccountStyle.title}>Vos informations personnelles: </h1>
+                <div className={AccountStyle.conteneurInfos}>
+                    {
+                        (!userinfo)?  null : <UserData user={userinfo}/>
+                    }
+                </div>
+
             </div>
+            
             <Footer/>
         </div>
     )
@@ -55,16 +51,11 @@ const styles = {
         marginBlockEnd: 50,
         fontSize: 37, 
     },
-    h1 : {
+    paragraph : {
         marginBlockStart: 75,
         marginBlockEnd: 50,
         marginInline: 'auto',
-        fontSize: 27, 
-    },
-    h2 : {
-        marginBlockStart: 58,
-        marginBlockEnd: 54,
-        fontSize: 22, 
+        fontSize: 20, 
     },
     infoList: {
         display: 'flex', 
@@ -81,10 +72,6 @@ const styles = {
         fontWeight: '600', 
         paddingRight: 5
     },
-    error: {
-        marginBlockStart: 80,
-        color: 'red',
-        fontWeight: '600',
-        fontSize: 19,
+    listValue: {
     }
 }
