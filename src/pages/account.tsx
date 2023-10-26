@@ -13,11 +13,10 @@ export default function Account (props: {credentials:Credentials}){
 
     useEffect(() => {
         fetchUserInfo(props.credentials.id, props.credentials.token,
-            (user) => user && setUserInfo(user),
+            (user) => user && setUserInfo(user), 
             (error) => error && setError(error)
         )
     }, [])
-
 
     return (
         <div style={styles.container}>
@@ -31,7 +30,7 @@ export default function Account (props: {credentials:Credentials}){
                         <h2 style={styles.h2}>Vos informations personnelles: </h2>
                         <ul style={styles.infoList}>
                             {
-                                userinfo ? <UserData userinfo={userinfo}/> : null
+                                userinfo ? <UserData user={userinfo}/> : null
                             }
                         </ul>
 

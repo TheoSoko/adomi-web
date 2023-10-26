@@ -16,7 +16,9 @@ axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem(
 export function serverSignIn(login:Login, callback:(payloadOrErr:{id:number,token:string}|string) => void){
     axios.post(`${API_SERVER}/sign-in`, login)
         .then((response) => {
-            callback(response.data)
+            // console.log(response.data);
+            callback(response.data);
+            window.location.href = "/account";
         })
         .catch((err?:AxiosError) => {
             if (err?.response){
@@ -28,6 +30,20 @@ export function serverSignIn(login:Login, callback:(payloadOrErr:{id:number,toke
                 callback('Une erreur de réseau est survenue')
             }
         })
+}
+
+export function signOutTest(){
+
+    try{
+
+        window.localStorage.clear();
+
+        window.location.href = "/sign-in";
+    }
+    catch(err){
+        console.warn(err);
+    }
+
 }
 
 

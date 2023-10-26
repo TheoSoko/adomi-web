@@ -1,0 +1,208 @@
+.conteneur{
+    display: flex;
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.title{
+    width: 100%;
+}
+
+.title h2{
+    text-align: center;
+}
+
+.title p{
+    text-align: center;
+    font-size: 1.4rem;
+    font-style: italic;
+}
+
+.backgroundHeader{
+
+    width: 100%;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    /* background-color: #1976D2; */
+    background-image: url("../../public/img-contact/contact_header.jpg");
+    background-repeat: no-repeat;
+    /* opacity: 0; */
+
+}
+
+@media (max-width: 900px){
+
+    .backgroundHeader{
+        background-size: cover;
+        height: 35vh;
+        background-position: top;
+        background-position-x: -45rem;
+        background-position-y: 2.2rem;
+    }
+
+    .conteneur{
+        flex-direction: column;
+    }
+
+    .subConteneur1{
+        width: 80%!important;
+    }
+
+    .subConteneur2{
+        width: 90%!important;
+        margin-top: 0.3rem!important;
+    }
+
+    .formMessage div{
+        margin-bottom: 1.5rem!important;
+    }
+
+    .formMessage button{
+        padding: 0.7rem!important;
+        width: 70%!important;
+    }
+
+    .subConteneur2 div{
+        font-size:1.2rem!important;
+    }
+
+}
+
+.headerTitle{
+    font-style: italic;
+    font-weight: normal;
+    padding-right:2%;
+    font-size: 3.8rem;
+}
+
+.subConteneur1{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 45%;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    /* border: solid 1px black; */
+}
+
+.subConteneur2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 38%;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    /* border: solid 1px black; */
+}
+.subConteneur div, .subConteneur2 div{
+    width: 100%;
+}
+
+.subConteneur p, .subConteneur2 div{
+    margin-left: 5%;
+    font-size: 1.4rem;
+}
+
+.bouttonShowForm{
+    text-decoration: none;
+    color: rgb(21, 35, 139);
+}
+
+.bouttonShowForm:hover{
+    color: rgb(86, 103, 255);
+}
+
+.formMessage{
+    width:100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-size: 1.2rem;
+    /* border: solid 1px black; */
+    background-color: rgb(229, 229, 229);
+    border-radius: 10px;
+    box-shadow: 3px 5px 5px rgb(182, 181, 181);
+
+}
+
+.formMessage div{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 7vh;
+    margin-bottom: 3.5rem;
+}
+
+.formMessage div label{
+    /* font-weight: bold; */
+    margin-bottom: 6px;
+}
+
+.formMessage div input{
+    padding: 0.4rem;
+    border-radius: 7px;
+    border: none;
+    /* margin-bottom: 1rem; */
+}
+
+.formMessage .messText{
+
+    height: 150px;
+}
+
+.formMessage textarea{
+    width: 100%;
+    height: 130px;
+    margin-bottom: 2%;
+}
+
+.formMessage button{
+    background-color: #1976D2;
+    color: white;
+    font-weight: bold;
+    width:40%;
+    padding: 0.4rem;
+    align-self: center;
+    margin-top: 1.5rem;
+    border-radius: 5px;
+}
+
+
+.formMessage button:hover{
+    background-color: #7bb7f3;
+}
+
+.validationMess{
+    font-weight: bold;
+    color: rgb(25, 141, 50);
+    text-align: center;
+}
+
+.errMess{
+    font-weight: bold;
+    color: red;
+    text-align: center;
+}
+
+.errMessInput{
+    color: red;
+    text-align: end;
+}
+
+.errMessOff{
+    display: none;
+}
+
+.errInput{
+    border: solid 1px red;
+}

@@ -1,0 +1,41 @@
+.container{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 4rem;
+    min-height: 81.3vh;
+}
+
+.title{
+    margin-block-start: 60;
+    margin-block-end: 50;
+    font-size: 37;
+    margin-bottom: 2.4rem;
+    margin-top: 4.4rem;
+}
+
+.conteneurInfos{
+    background-color : #ebebeb;
+    width: 30%;
+    display : flex;
+    flex-direction: column;
+    justify-content : space-around;
+    align-items : flex-start;
+    padding: 5px;
+    margin: 0px auto 2rem auto;
+}
+
+
+@media (max-width: 900px){
+
+    .container{
+        padding-top: 0rem;
+        min-height: 95vh;
+    }
+
+    .conteneurInfos{
+        width: 90%!important;
+    }
+
+}

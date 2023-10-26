@@ -2,26 +2,23 @@ import React from 'react'
 import { User, UserProp} from '../types/types';
 
 
-export default function displayUserInfo(props:UserProp) {
+export default function displayUserInfo(props: {user: User}) {
 
-        const user = props.userinfo;
+        const user = props.user;
 
         const style = {
-            conteneurInfos : {
-                backgroundColor : '#ebebeb',
-                width: '45%',
+            listInfo : {
                 display : 'flex',
                 flexFlow : 'column',
                 justifyContent : 'space-around',
-                alignItems : 'center',
-                margin: "0px auto 20px auto"
+                alignItems : 'flex-start',
             }
         }
 
-        if(user){
+        if (user) {
 
             return (
-                <div style={style.conteneurInfos}>
+                <ul style={style.listInfo}>
 
                     <p><b>Nom :</b> {user.first_name}</p>
 
@@ -38,7 +35,7 @@ export default function displayUserInfo(props:UserProp) {
                     <p><b>Code postal :</b> {user.post_code}</p>
                     
                     <p><b>Ville :</b> {user.city}</p>
-                </div>
+                </ul>
             
             )
         }
